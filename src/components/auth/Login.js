@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
-import SIGNIN_MUTATION from "../gql/Mutations";
+import { SIGNIN_MUTATION } from "../gql/Mutations";
 
 import { useMutation } from '@apollo/react-hooks';
 
-const Login = props => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onChange = e => {
     if (e.target.name === "email") setEmail(e.target.value);
     else if (e.target.name === "password") setPassword(e.target.value);
-
-    // this.setState({ [e.target.name]: e.target.value });
   };
 
   // const { errors } = this.state;
   const [signIn, { data }] = useMutation(SIGNIN_MUTATION);
-  console.log(data);
   if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
 
   return (

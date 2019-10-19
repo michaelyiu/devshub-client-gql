@@ -6,7 +6,7 @@ import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
 import GQLTest from "./components/layout/GQLTest";
 
-// import Register from "./components/auth/Register";
+import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -35,7 +35,7 @@ const App = () => {
           <GQLTest />
           <Navbar />
           <Route exact path="/" component={Landing} />
-          {/* <Route exact path="/register" component={Register} /> */}
+          <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
 
           {/* <Route exact path="/" component={Landing} />

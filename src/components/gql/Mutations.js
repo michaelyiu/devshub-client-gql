@@ -9,14 +9,15 @@ const SIGNIN_MUTATION = gql`
   }
 `;
 
-// const SignIn = () => {
-// 	const { loading, error, data } = useMutation(signInObject);
+const SIGNUP_MUTATION = gql`
+	mutation signUp($name: String!, $email: String!, $password: String!, $password2: String!) {
+		signUp(name: $name, email: $email, password: $password, password2: $password2){
+    	email
+		}
+  }
+`
 
-// 	console.log(data);
-// 	return data;
-// 	// if (loading) return <p>Loading...</p>;
-// 	// if (error) return <p>Error :(</p>;
-// 	// return <div>{data}</div>;
-// };
-
-export default SIGNIN_MUTATION;
+export {
+	SIGNIN_MUTATION,
+	SIGNUP_MUTATION
+};
