@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
 import GQLTest from "./components/layout/GQLTest";
 
-import Register from "./components/auth/Register";
+// import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
-import { ApolloProvider, useQuery } from "@apollo/react-hooks";
-import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient from "apollo-boost";
 import "./App.css";
 
 const client = new ApolloClient({
@@ -25,7 +25,7 @@ const App = () => {
           <GQLTest />
           <Navbar />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
+          {/* <Route exact path="/register" component={Register} /> */}
           <Route exact path="/login" component={Login} />
 
           {/* <Route exact path="/" component={Landing} />

@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
+import SIGNIN_MUTATION from "../gql/Mutations";
 
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation } from '@apollo/react-hooks';
 
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const onSubmit = e => {
-    e.preventDefault();
-
-    const userData = {
-      email,
-      password
-    };
-
-    // Call authAction loginUser
-    props.loginUser(userData);
-  };
 
   const onChange = e => {
     if (e.target.name === "email") setEmail(e.target.value);
@@ -28,6 +16,8 @@ const Login = props => {
   };
 
   // const { errors } = this.state;
+  const [signIn, { data }] = useMutation(SIGNIN_MUTATION)
+  console.log(data);
 
   return (
     <div>
@@ -39,14 +29,27 @@ const Login = props => {
               <p className="lead text-center">
                 Sign in to your DevConnector account
               </p>
-              <form onSubmit={onSubmit} noValidate>
+
+              <form
+                onSubmit={e => {
+
+                  e.preventDefault();
+                  const userData = {
+                    email,
+                    password
+                  };
+                  signIn({ variables: userData });
+
+                }}
+                noValidate
+              >
                 <TextFieldGroup
                   placeholder="Email Address"
                   name="email"
                   type="email"
                   value={email}
                   onChange={onChange}
-                  // error={errors.email}
+                // error={errors.email}
                 />
 
                 <TextFieldGroup
@@ -55,10 +58,11 @@ const Login = props => {
                   type="password"
                   value={password}
                   onChange={onChange}
-                  // error={errors.password}
+                // error={errors.password}
                 />
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />
+
               </form>
             </div>
           </div>
