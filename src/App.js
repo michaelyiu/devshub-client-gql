@@ -4,17 +4,25 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
+import GQLTest from "./components/layout/GQLTest";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
+import { ApolloProvider, useQuery } from "@apollo/react-hooks";
+import ApolloClient, { gql } from "apollo-boost";
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql"
+});
+
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
       <Router>
         <div className="App">
+          <GQLTest />
           <Navbar />
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
@@ -82,8 +90,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-    );
-  }
-}
+    </ApolloProvider>
+  );
+};
 
 export default App;

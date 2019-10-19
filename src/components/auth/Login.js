@@ -1,85 +1,71 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
-  }
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.auth.isAuthenticated) {
-    //   this.props.history.push("/dashboard");
-    // }
-    // if (nextProps.errors) {
-    //   this.setState({ errors: nextProps.errors });
-    // }
-  }
+const Login = props => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password
     };
 
     // Call authAction loginUser
-    this.props.loginUser(userData);
+    props.loginUser(userData);
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChange = e => {
+    if (e.target.name === "email") setEmail(e.target.value);
+    else if (e.target.name === "password") setPassword(e.target.value);
+
+    // this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    const { errors } = this.state;
+  // const { errors } = this.state;
 
-    return (
-      <div>
-        <div className="login">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 m-auto">
-                <h1 className="display-4 text-center">Log In</h1>
-                <p className="lead text-center">
-                  Sign in to your DevConnector account
-                </p>
-                <form onSubmit={this.onSubmit} noValidate>
-                  <TextFieldGroup
-                    placeholder="Email Address"
-                    name="email"
-                    type="email"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                  />
+  return (
+    <div>
+      <div className="login">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 m-auto">
+              <h1 className="display-4 text-center">Log In</h1>
+              <p className="lead text-center">
+                Sign in to your DevConnector account
+              </p>
+              <form onSubmit={onSubmit} noValidate>
+                <TextFieldGroup
+                  placeholder="Email Address"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={onChange}
+                  // error={errors.email}
+                />
 
-                  <TextFieldGroup
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                    error={errors.password}
-                  />
+                <TextFieldGroup
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={onChange}
+                  // error={errors.password}
+                />
 
-                  <input
-                    type="submit"
-                    className="btn btn-info btn-block mt-4"
-                  />
-                </form>
-              </div>
+                <input type="submit" className="btn btn-info btn-block mt-4" />
+              </form>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;
