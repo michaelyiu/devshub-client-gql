@@ -16,8 +16,9 @@ const Login = props => {
   };
 
   // const { errors } = this.state;
-  const [signIn, { data }] = useMutation(SIGNIN_MUTATION)
+  const [signIn, { data }] = useMutation(SIGNIN_MUTATION);
   console.log(data);
+  if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
 
   return (
     <div>

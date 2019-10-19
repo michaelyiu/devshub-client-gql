@@ -10,11 +10,21 @@ import GQLTest from "./components/layout/GQLTest";
 import Login from "./components/auth/Login";
 
 import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "apollo-boost";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
 import "./App.css";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: "http://localhost:4000/graphql",
+  cache: new InMemoryCache(),
+  request: (operation) => {
+    const token = localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        authorization: token ? token : null
+      }
+    })
+  },
+  // credentials: "include"
 });
 
 const App = () => {
