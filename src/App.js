@@ -9,23 +9,13 @@ import GQLTest from "./components/layout/GQLTest";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
+import Dashboard from "./components/dashboard/Dashboard";
+
 import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient, { InMemoryCache } from "apollo-boost";
 import "./App.css";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  cache: new InMemoryCache(),
-  request: (operation) => {
-    const token = localStorage.getItem('token');
-    operation.setContext({
-      headers: {
-        authorization: token ? token : null
-      }
-    })
-  },
-  // credentials: "include"
-});
+import client from "./apollo";
+
 
 const App = () => {
   return (
@@ -38,6 +28,8 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
 
+
+          <Route exact path="/dashboard" component={Dashboard} />
           {/* <Route exact path="/" component={Landing} />
           <div className="container">
             <Route exact path="/register" component={Register} />

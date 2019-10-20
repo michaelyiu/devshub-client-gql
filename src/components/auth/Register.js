@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { SIGNUP_MUTATION } from "../gql/Mutations";
 
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,6 +17,11 @@ const Register = () => {
     else if (e.target.name === "password2") setPassword2(e.target.value);
   };
 
+
+  const client = useApolloClient();
+
+  client.writeData({ data: { test: true } })
+  console.log(client);
 
   const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
 
