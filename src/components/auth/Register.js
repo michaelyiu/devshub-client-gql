@@ -20,8 +20,8 @@ const Register = () => {
 
   const client = useApolloClient();
 
-  client.writeData({ data: { test: true } })
-  console.log(client);
+  client.writeData({ data: { isAuth: true } })
+  console.log(client.cache.data.data);
 
   const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
 
