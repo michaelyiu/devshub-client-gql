@@ -9,7 +9,14 @@ const CURRENT_USER_QUERY = gql`
   }
 `;
 
+const ISLOGGEDIN_QUERY = gql`
+	query {
+		isAuth @client
+	}
+`
+
 export {
+	ISLOGGEDIN_QUERY,
 	CURRENT_USER_QUERY,
 };
 

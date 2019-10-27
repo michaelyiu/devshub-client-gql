@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import { CURRENT_USER_QUERY } from "../gql/Queries";
+// import { CURRENT_USER_QUERY } from "../gql/Queries";
 
-import { useQuery } from '@apollo/react-hooks';
+// import { useQuery } from '@apollo/react-hooks';
 
 const Dashboard = () => {
 	//grab user info from apollo cache. or query for it. currentUser data should probably be completely cached
-	const [user, setUser] = useState({name: "", email:""})
-	const [education, setEducation] = useState();
-	const [experience, setExperience] = useState();
+	// const [user, setUser] = useState({name: "", email:""})
+	// const [education, setEducation] = useState();
+	// const [experience, setExperience] = useState();
 	let dashboardContent;
 	// If loading, load spinner, otherwise load actual content
 	/*
@@ -17,10 +17,10 @@ const Dashboard = () => {
 		}
 	*/
 
-	const { loading, error, data } = useQuery(CURRENT_USER_QUERY, {
-		variables: { email: 'onew1ng3d@hotmail.com'}
-	});
-	console.log(data);
+	// const { loading, error, data } = useQuery(CURRENT_USER_QUERY, {
+	// 	variables: { email: 'onew1ng3d@hotmail.com'}
+	// });
+	// console.log(data);
 	return (
 		<div className="dashboard">
 			<div className="container">

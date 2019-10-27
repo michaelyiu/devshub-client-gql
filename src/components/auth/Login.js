@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
-import { SIGNIN_MUTATION } from "../gql/Mutations";
+import { SIGNIN_MUTATION, ISLOGGEDIN_MUTATION } from "../gql/Mutations";
+import { ISLOGGEDIN_QUERY } from "../gql/Queries";
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import { useMutation } from '@apollo/react-hooks';
+//defined function outside of stateless component so that its not defined every single time
+const login = (email, password) => {
+  console.log(email, password);
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,10 +18,26 @@ const Login = () => {
     else if (e.target.name === "password") setPassword(e.target.value);
   };
 
+  const onSubmit = e => {
+    e.preventDefault();
+    const userData = {
+      email,
+      password
+    };
+    test();
+    signIn({ variables: userData });
+    login(email, password);
+  };
+
   // const { errors } = this.state;
-  const [signIn, { data }] = useMutation(SIGNIN_MUTATION);
-  if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
+  const [test, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
+
+  const [signIn] = useMutation(SIGNIN_MUTATION);
+  // if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
   //maybe set isAuth to true here via localStorage. 
+
+
+  const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
 
   return (
     <div>
@@ -29,19 +50,7 @@ const Login = () => {
                 Sign in to your DevConnector account
               </p>
 
-              <form
-                onSubmit={e => {
-
-                  e.preventDefault();
-                  const userData = {
-                    email,
-                    password
-                  };
-                  signIn({ variables: userData });
-
-                }}
-                noValidate
-              >
+              <form onSubmit={onSubmit}>
                 <TextFieldGroup
                   placeholder="Email Address"
                   name="email"
@@ -67,7 +76,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

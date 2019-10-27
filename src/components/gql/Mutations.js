@@ -1,5 +1,10 @@
-// import React from "react";
 import { gql } from "apollo-boost";
+
+const ISLOGGEDIN_MUTATION = gql`
+	mutation {
+		changeValue @client
+	}
+`
 
 const SIGNIN_MUTATION = gql`
 	mutation signIn($email: String!, $password: String!) {
@@ -18,6 +23,7 @@ const SIGNUP_MUTATION = gql`
 `
 
 export {
+	ISLOGGEDIN_MUTATION,
 	SIGNIN_MUTATION,
 	SIGNUP_MUTATION
 };
