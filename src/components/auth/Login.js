@@ -35,11 +35,9 @@ const Login = () => {
     // if ()
   };
 
-  // const { errors } = this.state;
   const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
-  // if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
   //maybe set isAuth to true here via localStorage. 
 
 
