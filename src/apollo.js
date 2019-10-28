@@ -2,6 +2,8 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { persistCache } from "apollo-cache-persist";
 
+import { ISLOGGEDIN_QUERY } from "./components/gql/Queries"
+
 const cache = new InMemoryCache();
 persistCache({
 	cache,
@@ -13,8 +15,9 @@ const client = new ApolloClient({
 	resolvers: {
 		Mutation: {
 			changeValue: (_, args, { cache }) => {
+				const { isAuth } = cache.readQuery({ query: ISLOGGEDIN_QUERY })
 				cache.writeData({
-					data: { isAuth: true }
+					data: { isAuth: !isAuth }
 				})
 				return null;
 			}
