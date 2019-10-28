@@ -21,12 +21,12 @@ const Register = () => {
   const client = useApolloClient();
 
   client.writeData({ data: { isAuth: true } })
-  console.log(client.cache.data.data);
 
   const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
 
 
   return (
+
     <div className="register">
       <div className="container">
         <div className="row">

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { SIGNIN_MUTATION, ISLOGGEDIN_MUTATION } from "../gql/Mutations";
 import { ISLOGGEDIN_QUERY } from "../gql/Queries";
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 //defined function outside of stateless component so that its not defined every single time
 const login = (email, password) => {
@@ -12,6 +13,8 @@ const login = (email, password) => {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  let history = useHistory();
 
   const onChange = e => {
     if (e.target.name === "email") setEmail(e.target.value);
@@ -27,7 +30,9 @@ const Login = () => {
     signIn({ variables: userData });
     auth();
     login(email, password);
-    console.log("checkauth", data)
+    // console.log("checkauth", data)
+
+    // if ()
   };
 
   // const { errors } = this.state;
@@ -39,6 +44,11 @@ const Login = () => {
 
 
   const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
+
+  useEffect(() => {
+    if (data && data.isAuth)
+      history.push("/dashboard");
+  })
 
   return (
     <div>
