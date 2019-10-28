@@ -32,7 +32,7 @@ const client = new ApolloClient({
 });
 
 //set default values
-client.cache.writeData({ data: { isAuth: false } })
+// client.cache.writeData({ data: { isAuth: false } })
 
 
 export default client;

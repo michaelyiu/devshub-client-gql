@@ -24,13 +24,14 @@ const Login = () => {
       email,
       password
     };
-    test();
     signIn({ variables: userData });
+    auth();
     login(email, password);
+    console.log("checkauth", data)
   };
 
   // const { errors } = this.state;
-  const [test, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
+  const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
 
   const [signIn] = useMutation(SIGNIN_MUTATION);
   // if (data && data.signIn) localStorage.setItem('token', data.signIn.token)
