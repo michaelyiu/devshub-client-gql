@@ -1,16 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { ISLOGGEDIN_MUTATION } from "../gql/Mutations";
+import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 const Navbar = () => {
   const onLogoutClick = e => {
     e.preventDefault();
+    auth();
     console.log("hello! world~");
     // this.props.clearCurrentProfile();
     // this.props.logoutUser();
   }
 
+  const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
+
+  const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
   // render() {
   // const { isAuthenticated, user } = this.props.auth;
+
+  const {
+    data: currentUser,
+    loading: currentUserQueryLoading,
+    error: currentUserQueryError
+  } = useQuery(CURRENT_USER_QUERY, {
+    variables: {
+      email: "onew1ng3d@hotmail.com"
+    }
+  });
+
+  console.log(currentUser)
+  console.log(currentUserQueryLoading)
+  console.log(currentUserQueryError)
+
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">
@@ -22,11 +44,12 @@ const Navbar = () => {
       <li className="nav-item flex-center-vertically">
         <Link className="nav-link" to="/dashboard">
           Dashboard
-          </Link>
+        </Link>
       </li>
       <li className="nav-item flex-center-vertically">
         <img
           className="rounded-circle ml-2"
+          src="https://data.whicdn.com/images/236777023/original.jpg"
           // src={user.avatar}
           // alt={user.name}
           style={{ width: "25px", marginRight: "5px" }}
@@ -37,7 +60,7 @@ const Navbar = () => {
         <Link className="nav-link" to="/dashboard">
           {/* {user.name} */}
           Test
-          </Link>
+        </Link>
       </li>
       <li className="nav-item flex-center-vertically">
         <a
@@ -46,7 +69,7 @@ const Navbar = () => {
           className="nav-link"
         >
           Logout
-          </a>
+        </a>
       </li>
     </ul>
   );
@@ -56,12 +79,12 @@ const Navbar = () => {
       <li className="nav-item">
         <Link className="nav-link" to="/register">
           Sign Up
-          </Link>
+        </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/login">
           Login
-          </Link>
+        </Link>
       </li>
     </ul>
   );
@@ -90,7 +113,7 @@ const Navbar = () => {
                 </Link>
             </li>
           </ul>
-          {/* {isAuthenticated ? authLinks : guestLinks} */}
+          {(data && data.isAuth) ? authLinks : guestLinks}
         </div>
       </div>
     </nav>

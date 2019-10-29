@@ -27,25 +27,41 @@ const Login = () => {
       email,
       password
     };
-    signIn({ variables: userData });
-    auth();
-    login(email, password);
-    // console.log("checkauth", data)
+    console.log("reached");
 
-    // if ()
+    signIn({ variables: userData }).then(
+      result => {
+        localStorage.setItem('token', result.data.signIn.token);
+        auth();
+        // console.log(result.data.signIn.token);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    login(email, password);
+
   };
 
-  const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
+  const [auth] = useMutation(ISLOGGEDIN_MUTATION);
 
-  const [signIn] = useMutation(SIGNIN_MUTATION);
+  const [signIn, { loading, error }] = useMutation(
+    SIGNIN_MUTATION
+  );
   //maybe set isAuth to true here via localStorage. 
 
 
-  const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
+  const {
+    data: loginQuery,
+    loading: loginLoading,
+    error: loginError
+  } = useQuery(ISLOGGEDIN_QUERY);
+
 
   useEffect(() => {
-    if (data && data.isAuth)
+    if (loginQuery && loginQuery.isAuth)
       history.push("/dashboard");
+
   })
 
   return (
