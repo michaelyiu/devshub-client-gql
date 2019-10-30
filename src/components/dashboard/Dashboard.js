@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 // import { CURRENT_USER_QUERY } from "../gql/Queries";
 
@@ -16,6 +16,9 @@ const Dashboard = () => {
 			dashboardContent = <Spinner />
 		}
 	*/
+  useEffect(() => {
+		
+	})
 
 	// const { loading, error, data } = useQuery(CURRENT_USER_QUERY, {
 	// 	variables: { email: 'onew1ng3d@hotmail.com'}

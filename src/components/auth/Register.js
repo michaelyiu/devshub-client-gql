@@ -22,7 +22,7 @@ const Register = () => {
 
   client.writeData({ data: { isAuth: true } })
 
-  const [signUp, { data }] = useMutation(SIGNUP_MUTATION);
+  const [signUp] = useMutation(SIGNUP_MUTATION);
 
 
   return (

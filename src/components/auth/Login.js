@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
-import { SIGNIN_MUTATION, ISLOGGEDIN_MUTATION } from "../gql/Mutations";
+import { SIGNIN_MUTATION } from "../gql/Mutations";
 import { ISLOGGEDIN_QUERY } from "../gql/Queries";
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 
 //defined function outside of stateless component so that its not defined every single time
@@ -14,6 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const client = useApolloClient();
   let history = useHistory();
 
   const onChange = e => {
@@ -27,24 +28,27 @@ const Login = () => {
       email,
       password
     };
-    console.log("reached");
 
     signIn({ variables: userData }).then(
       result => {
         localStorage.setItem('token', result.data.signIn.token);
-        auth();
+
+        client.cache.writeData({ data: { isAuth: true } })
+        // auth();
       },
       error => {
         console.log(error);
       }
     );
+    history.push("/dashboard");
+
     login(email, password);
 
   };
 
-  const [auth] = useMutation(ISLOGGEDIN_MUTATION);
+  // const [auth] = useMutation(ISLOGGEDIN_MUTATION);
 
-  const [signIn, { loading, error }] = useMutation(
+  const [signIn,] = useMutation(
     SIGNIN_MUTATION
   );
   //maybe set isAuth to true here via localStorage. 
@@ -52,8 +56,8 @@ const Login = () => {
 
   const {
     data: loginQuery,
-    loading: loginLoading,
-    error: loginError
+    // loading: loginLoading,
+    // error: loginError
   } = useQuery(ISLOGGEDIN_QUERY);
 
 

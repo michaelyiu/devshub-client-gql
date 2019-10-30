@@ -1,36 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ISLOGGEDIN_MUTATION } from "../gql/Mutations";
 import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 
 const Navbar = () => {
 
-
   const onLogoutClick = e => {
     e.preventDefault();
+
     auth();
-    // this.props.clearCurrentProfile();
-    // this.props.logoutUser();
+    localStorage.clear();
+    client.clearStore();
   }
 
-  const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
-  const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
+  const [auth] = useMutation(ISLOGGEDIN_MUTATION);
+  const { data,
+    // loading,
+    // error
+  } = useQuery(ISLOGGEDIN_QUERY);
 
+  const client = useApolloClient();
 
 
   const {
     data: currentUser,
     loading: currentUserQueryLoading,
-    error: currentUserQueryError
+    // error: currentUserQueryError
   } = useQuery(CURRENT_USER_QUERY, {
     variables: {
       email: "onew1ng3d@hotmail.com"
     }
   });
-  if (!currentUserQueryLoading)
-    console.log(currentUser.user);
 
+
+  //NavBar needs to useEffect to check the apollo cache for currentUser
+  // useEffect(() => {
+  //   data;
+  // })
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">
@@ -47,15 +54,15 @@ const Navbar = () => {
       <li className="nav-item flex-center-vertically">
         <img
           className="rounded-circle ml-2"
-          src={!currentUserQueryLoading ? currentUser.user.avatar : null}
-          alt={!currentUserQueryLoading ? currentUser.user.name : null}
+          src={!currentUserQueryLoading && currentUser ? currentUser.user.avatar : ""}
+          alt={!currentUserQueryLoading && currentUser ? currentUser.user.name : ""}
           style={{ width: "25px", marginRight: "5px" }}
           title="You must have a Gravatar connected to your email to display an image"
         />
       </li>
       <li className="nav-item flex-center-vertically">
         <Link className="nav-link" to="/dashboard">
-          {/* {user.name} */}
+          {!currentUserQueryLoading && currentUser ? currentUser.user.name : null}
           Test
         </Link>
       </li>
