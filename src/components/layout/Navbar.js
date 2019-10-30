@@ -5,19 +5,19 @@ import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 const Navbar = () => {
+
+
   const onLogoutClick = e => {
     e.preventDefault();
     auth();
-    console.log("hello! world~");
     // this.props.clearCurrentProfile();
     // this.props.logoutUser();
   }
 
   const [auth, { changeValue }] = useMutation(ISLOGGEDIN_MUTATION);
-
   const { data, loading, error } = useQuery(ISLOGGEDIN_QUERY);
-  // render() {
-  // const { isAuthenticated, user } = this.props.auth;
+
+
 
   const {
     data: currentUser,
@@ -28,10 +28,8 @@ const Navbar = () => {
       email: "onew1ng3d@hotmail.com"
     }
   });
-
-  console.log(currentUser)
-  console.log(currentUserQueryLoading)
-  console.log(currentUserQueryError)
+  if (!currentUserQueryLoading)
+    console.log(currentUser.user);
 
 
   const authLinks = (
@@ -49,9 +47,8 @@ const Navbar = () => {
       <li className="nav-item flex-center-vertically">
         <img
           className="rounded-circle ml-2"
-          src="https://data.whicdn.com/images/236777023/original.jpg"
-          // src={user.avatar}
-          // alt={user.name}
+          src={!currentUserQueryLoading ? currentUser.user.avatar : null}
+          alt={!currentUserQueryLoading ? currentUser.user.name : null}
           style={{ width: "25px", marginRight: "5px" }}
           title="You must have a Gravatar connected to your email to display an image"
         />

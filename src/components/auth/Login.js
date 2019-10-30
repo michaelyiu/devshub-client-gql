@@ -33,7 +33,6 @@ const Login = () => {
       result => {
         localStorage.setItem('token', result.data.signIn.token);
         auth();
-        // console.log(result.data.signIn.token);
       },
       error => {
         console.log(error);
