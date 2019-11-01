@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from '../../contexts/AuthContext';
 // import { ISLOGGEDIN_MUTATION } from "../gql/Mutations";
 // import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
 // import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   // const [user, setUser] = useState({});
   // let history = useHistory();
+  const { isAuthenticated } = useContext(AuthContext);
 
   // const onLogoutClick = e => {
   //   e.preventDefault();
@@ -129,6 +131,7 @@ const Navbar = () => {
                 </Link>
             </li>
           </ul>
+          {isAuthenticated ? authLinks : guestLinks}
           {/* {(data && data.isAuth) ? authLinks : guestLinks} */}
         </div>
       </div>

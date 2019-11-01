@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { AuthContext } from '../../contexts/AuthContext';
+
 // import { SIGNIN_MUTATION, ISLOGGEDIN_MUTATION } from "../gql/Mutations";
 // import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
 // import { useMutation, useQuery, useLazyQuery, useApolloClient } from '@apollo/react-hooks';
@@ -13,6 +15,8 @@ import TextFieldGroup from "../common/TextFieldGroup";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isAuthenticated, toggleAuth } = useContext(AuthContext);
 
   // let history = useHistory();
 
@@ -40,7 +44,7 @@ const Login = () => {
     // );
     // history.push("/dashboard");
 
-
+    toggleAuth();
     // login(email, password);
 
   };

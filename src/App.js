@@ -14,23 +14,28 @@ import Dashboard from "./components/dashboard/Dashboard";
 import { ApolloProvider } from "@apollo/react-hooks";
 import "./App.css";
 
+
+import AuthContextProvider from './contexts/AuthContext';
+
 import client from "./apollo";
 
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="App">
-          <GQLTest />
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
+    <div className="App">
+      <ApolloProvider client={client}>
+        <AuthContextProvider>
+
+          <Router>
+            <GQLTest />
+            <Navbar />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
 
 
-          <Route exact path="/dashboard" component={Dashboard} />
-          {/* <Route exact path="/" component={Landing} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            {/* <Route exact path="/" component={Landing} />
           <div className="container">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -89,10 +94,11 @@ const App = () => {
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
           </div> */}
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+            <Footer />
+          </Router>
+        </AuthContextProvider>
+      </ApolloProvider>
+    </div>
   );
 };
 
