@@ -1,43 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ISLOGGEDIN_MUTATION } from "../gql/Mutations";
-import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
-import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
+// import { ISLOGGEDIN_MUTATION } from "../gql/Mutations";
+// import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
+// import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
+// import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
+  // const [user, setUser] = useState({});
+  // let history = useHistory();
 
-  const onLogoutClick = e => {
-    e.preventDefault();
+  // const onLogoutClick = e => {
+  //   e.preventDefault();
+  //   localStorage.clear();
+  //   client.writeData({ data: { isAuth: false } });
+  //   history.push("/login");
 
-    auth();
-    localStorage.clear();
-    client.clearStore();
-  }
-
-  const [auth] = useMutation(ISLOGGEDIN_MUTATION);
-  const { data,
-    // loading,
-    // error
-  } = useQuery(ISLOGGEDIN_QUERY);
-
-  const client = useApolloClient();
+  // }
 
 
-  const {
-    data: currentUser,
-    loading: currentUserQueryLoading,
-    // error: currentUserQueryError
-  } = useQuery(CURRENT_USER_QUERY, {
-    variables: {
-      email: "onew1ng3d@hotmail.com"
-    }
-  });
+  // const {
+  //   data,
+  //   loading,
+  //   error,
+  // } = useQuery(ISLOGGEDIN_QUERY);
 
+  // const client = useApolloClient();
 
-  //NavBar needs to useEffect to check the apollo cache for currentUser
+  //seems to only be available after refresh
+  // const {
+  //   data: currentUser,
+  //   loading: currentUserQueryLoading,
+  //   error: currentUserQueryError
+  // } = useQuery(CURRENT_USER_QUERY, {
+  //   variables: {
+  //     email: "onew1ng3d@hotmail.com"
+  //   }
+  // });
+  // console.log(data);
+  // console.log(currentUser);
+  // console.log(currentUserQueryLoading);
+  // console.log(currentUserQueryError);
+
   // useEffect(() => {
-  //   data;
-  // })
+  //   setUser(currentUser);
+  //   console.log(user);
+  // },
+  //   []
+  // )
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">
@@ -54,22 +63,25 @@ const Navbar = () => {
       <li className="nav-item flex-center-vertically">
         <img
           className="rounded-circle ml-2"
-          src={!currentUserQueryLoading && currentUser ? currentUser.user.avatar : ""}
-          alt={!currentUserQueryLoading && currentUser ? currentUser.user.name : ""}
+          // src={user.avatar}
+          // alt={user.name}
+          // src={!currentUserQueryLoading && currentUser ? currentUser.user.avatar : ""}
+          // alt={!currentUserQueryLoading && currentUser ? currentUser.user.name : ""}
           style={{ width: "25px", marginRight: "5px" }}
           title="You must have a Gravatar connected to your email to display an image"
         />
       </li>
       <li className="nav-item flex-center-vertically">
         <Link className="nav-link" to="/dashboard">
-          {!currentUserQueryLoading && currentUser ? currentUser.user.name : null}
+          {/* {user.name} */}
+          {/* {!currentUserQueryLoading && currentUser ? currentUser.user.name : null} */}
           Test
         </Link>
       </li>
       <li className="nav-item flex-center-vertically">
         <a
           href="/#"
-          onClick={onLogoutClick}
+          // onClick={onLogoutClick}
           className="nav-link"
         >
           Logout
@@ -117,13 +129,11 @@ const Navbar = () => {
                 </Link>
             </li>
           </ul>
-          {(data && data.isAuth) ? authLinks : guestLinks}
+          {/* {(data && data.isAuth) ? authLinks : guestLinks} */}
         </div>
       </div>
     </nav>
   );
 }
-// }
 
 export default Navbar;
-// export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(Navbar);

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
-import { SIGNUP_MUTATION } from "../gql/Mutations";
+// import { SIGNUP_MUTATION } from "../gql/Mutations";
 
-import { useMutation, useApolloClient } from '@apollo/react-hooks';
+// import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -18,11 +18,11 @@ const Register = () => {
   };
 
 
-  const client = useApolloClient();
+  // const client = useApolloClient();
 
-  client.writeData({ data: { isAuth: true } })
+  // client.writeData({ data: { isAuth: true } })
 
-  const [signUp] = useMutation(SIGNUP_MUTATION);
+  // const [signUp] = useMutation(SIGNUP_MUTATION);
 
 
   return (
@@ -44,7 +44,7 @@ const Register = () => {
                   password,
                   password2
                 }
-                signUp({ variables: userData });
+                // signUp({ variables: userData });
               }}
               noValidate
             >
