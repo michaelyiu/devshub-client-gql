@@ -34,12 +34,15 @@ const Dashboard = () => {
       }
     }
 	);
-	console.log(currentUser);
 
 	if(currentUser && currentUser.user)
 		addCurrentUser(currentUser.user)
 
-  const { data, loading, error } = useQuery(
+  const { 
+		data: userProfile, 
+		loading: userProfileLoading, 
+		error: userProfileError 
+	} = useQuery(
     GET_PROFILE,
     {
       variables: {
@@ -47,7 +50,6 @@ const Dashboard = () => {
       }
     }
   );
-  console.log(data);
 
 
 
