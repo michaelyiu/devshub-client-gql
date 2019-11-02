@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
+import { ProfileContext } from '../../contexts/ProfileContext';
 import Spinner from '../common/Spinner';
 
 import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
@@ -12,6 +13,7 @@ import Education from "./Education";
 
 const Dashboard =  () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
+	const { setExperience, setEducation } = useContext(ProfileContext);
 	
 	let history = useHistory();
 	
@@ -52,7 +54,11 @@ const Dashboard =  () => {
     }
 	);
 
-
+	if (userProfile && userProfile.profile)
+	{
+		setEducation(userProfile.profile.education)
+		setExperience(userProfile.profile.experience)
+	}
 
 
 
