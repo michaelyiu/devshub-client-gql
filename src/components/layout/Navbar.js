@@ -4,13 +4,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
-  const { isAuthenticated, currentUser, toggleAuth } = useContext(AuthContext);
+  const { isAuthenticated, currentUser, toggleAuth, clearCurrentUser } = useContext(AuthContext);
   let history = useHistory();
 
   const onLogoutClick = e => {
     e.preventDefault();
     localStorage.clear();
     toggleAuth();
+    clearCurrentUser();
     history.push("/login");
 
   }

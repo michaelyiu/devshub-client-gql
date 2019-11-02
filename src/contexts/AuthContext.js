@@ -11,8 +11,11 @@ const AuthContextProvider = (props) => {
 	const addCurrentUser = (user) => {
 		setCurrentUser(user);
 	}
+	const clearCurrentUser = () => {
+		setCurrentUser({})
+	}
 	return (
-		<AuthContext.Provider value={{ isAuthenticated, toggleAuth, currentUser, addCurrentUser }}>
+		<AuthContext.Provider value={{ isAuthenticated, toggleAuth, currentUser, addCurrentUser, clearCurrentUser }}>
 			{props.children}
 		</AuthContext.Provider>
 	)
