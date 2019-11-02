@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { AuthContext } from '../../contexts/AuthContext';
 
-// import { CURRENT_USER_QUERY } from "../gql/Queries";
+import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
 
-// import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 const Dashboard = () => {
+  const { isAuthenticated, addCurrentUser } = useContext(AuthContext);
+
+  let history = useHistory();
+
 	//grab user info from apollo cache. or query for it. currentUser data should probably be completely cached
 	// const [user, setUser] = useState({name: "", email:""})
 	// const [education, setEducation] = useState();
@@ -16,9 +22,43 @@ const Dashboard = () => {
 			dashboardContent = <Spinner />
 		}
 	*/
-  useEffect(() => {
-		
-	})
+	const { 
+		data: currentUser, 
+		loading: currentUserLoading, 
+		error: currentUserError 
+	} = useQuery(
+    GET_CURRENT_USER,
+    {
+      variables: {
+        email: "onew1ng3d@hotmail.com"
+      }
+    }
+	);
+	console.log(currentUser);
+
+	if(currentUser && currentUser.user)
+		addCurrentUser(currentUser.user)
+
+  const { data, loading, error } = useQuery(
+    GET_PROFILE,
+    {
+      variables: {
+        email: "onew1ng3d@hotmail.com"
+      }
+    }
+  );
+  console.log(data);
+
+
+
+useEffect(() => {
+	if(!isAuthenticated){
+    history.push("/login");
+	} else{
+		//if the user is authenticated
+
+	}
+})
 
 	// const { loading, error, data } = useQuery(CURRENT_USER_QUERY, {
 	// 	variables: { email: 'onew1ng3d@hotmail.com'}

@@ -1,80 +1,44 @@
-import React, { useState, useContext, useEffect } from "react";
-import TextFieldGroup from "../common/TextFieldGroup";
+import React, { useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
+import TextFieldGroup from "../common/TextFieldGroup";
 
-// import { SIGNIN_MUTATION, ISLOGGEDIN_MUTATION } from "../gql/Mutations";
-// import { ISLOGGEDIN_QUERY, CURRENT_USER_QUERY } from "../gql/Queries";
-// import { useMutation, useQuery, useLazyQuery, useApolloClient } from '@apollo/react-hooks';
-// import { useHistory } from "react-router-dom";
+import { SIGNIN_MUTATION } from "../gql/Mutations";
+import { useMutation } from '@apollo/react-hooks';
+import { Redirect } from 'react-router'
+import { useForm } from '../../hooks'
+import Spinner from '../common/Spinner';
 
-// //defined function outside of stateless component so that its not defined every single time
-// const login = (email, password) => {
-//   console.log(email, password);
-// }
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const { isAuthenticated, toggleAuth } = useContext(AuthContext);
-
-  // let history = useHistory();
-
-  const onChange = e => {
-    console.log("change")
-    // if (e.target.name === "email") setEmail(e.target.value);
-    // else if (e.target.name === "password") setPassword(e.target.value);
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    const userData = {
-      email,
-      password
-    };
-
-    // await signIn({ variables: userData }).then(
-    //   async result => {
-    //     client.cache.writeData({ data: { isAuth: true } })
-    //     await localStorage.setItem('token', result.data.signIn.token);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
-    // history.push("/dashboard");
-
+  const { values, handleChange, handleSubmit } = useForm(() => {
+    signIn()
     toggleAuth();
-    // login(email, password);
+  }, {
+    email: '',
+    password: ''
+  })
 
-  };
-  // const client = useApolloClient();
-  // const [getCurrentUser, { loading, data }] = useLazyQuery(CURRENT_USER_QUERY, {
-  //   variables: {
-  //     email: "onew1ng3d@hotmail.com"
-  //   }
-  // });
+  const { toggleAuth } = useContext(AuthContext);
 
-  // const [auth] = useMutation(ISLOGGEDIN_MUTATION);
+  const [signIn, { loading, data, error }] = useMutation(
+    SIGNIN_MUTATION,
+    {
+      variables: values
+    }
+  );
 
-  // const [signIn] = useMutation(
-  //   SIGNIN_MUTATION
-  // );
-  //maybe set isAuth to true here via localStorage. 
+  if (loading) return <Spinner />
 
+  // Show error message if mutation fails
+  // if (error) return <Error message={error.message} />
 
-  // const {
-  //   data: loginQuery,
-  // loading: loginLoading,
-  // error: loginError
-  // } = useQuery(ISLOGGEDIN_QUERY);
-
-
-  // useEffect(() => {
-  //   if (loginQuery && loginQuery.isAuth)
-  //     history.push("/dashboard");
-
-  // })
+  // Store token if login is successful
+  if (data) {
+    window.localStorage.setItem('token', data.signIn.token)
+    // Redirect to home page
+    return <Redirect to='/dashboard' />
+  }
 
   return (
     <div>
@@ -87,13 +51,13 @@ const Login = () => {
                 Sign in to your DevConnector account
               </p>
 
-              <form onSubmit={onSubmit}>
+              <form onSubmit={handleSubmit}>
                 <TextFieldGroup
                   placeholder="Email Address"
                   name="email"
                   type="email"
-                  value={email}
-                  onChange={onChange}
+                  value={values.email}
+                  onChange={handleChange}
                 // error={errors.email}
                 />
 
@@ -101,8 +65,8 @@ const Login = () => {
                   placeholder="Password"
                   name="password"
                   type="password"
-                  value={password}
-                  onChange={onChange}
+                  value={values.password}
+                  onChange={handleChange}
                 // error={errors.password}
                 />
 

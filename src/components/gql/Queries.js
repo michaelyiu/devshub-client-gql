@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 
-const CURRENT_USER_QUERY = gql`
+const GET_CURRENT_USER = gql`
 	query ($email: String!) {
 		user(email: $email) {
     	name 
@@ -16,9 +16,19 @@ const ISLOGGEDIN_QUERY = gql`
 	}
 `;
 
+const GET_PROFILE = gql`
+	query ($email: String!) {
+		profile(email: $email) {
+			handle
+    	bio 
+		}
+	}
+`
+
 export {
 	ISLOGGEDIN_QUERY,
-	CURRENT_USER_QUERY,
+	GET_CURRENT_USER,
+	GET_PROFILE
 };
 
 
