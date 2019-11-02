@@ -22,6 +22,7 @@ const GET_PROFILE = gql`
 			handle
     	bio
 			experience {
+				id
 				title
 				company
 				location
@@ -31,6 +32,7 @@ const GET_PROFILE = gql`
 				description
 			}
 			education {
+				id
 				school
 				degree
 				fieldOfStudy
