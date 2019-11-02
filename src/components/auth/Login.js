@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
 import TextFieldGroup from "../common/TextFieldGroup";
 
@@ -19,7 +19,9 @@ const Login = () => {
     password: ''
   })
 
-  const { toggleAuth } = useContext(AuthContext);
+  const { isAuthenticated, toggleAuth } = useContext(AuthContext);
+
+
 
   const [signIn, { loading, data, error }] = useMutation(
     SIGNIN_MUTATION,
@@ -27,6 +29,8 @@ const Login = () => {
       variables: values
     }
   );
+
+
 
   if (loading) return <Spinner />
 
@@ -39,6 +43,10 @@ const Login = () => {
     // Redirect to home page
     return <Redirect to='/dashboard' />
   }
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />
+  }
+
 
   return (
     <div>
