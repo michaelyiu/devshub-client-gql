@@ -1,28 +1,47 @@
 import React, { useState } from "react";
-import TextFieldGroup from "../common/TextFieldGroup";
-// import { SIGNUP_MUTATION } from "../gql/Mutations";
+import { useForm } from '../../hooks'
+import Spinner from '../common/Spinner';
 
-// import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import TextFieldGroup from "../common/TextFieldGroup";
+
+import { SIGNUP_MUTATION } from "../gql/Mutations";
+import { useMutation } from '@apollo/react-hooks';
+
 
 const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const { values, handleChange, handleSubmit } = useForm(() => {
+    // signIn()
+    // toggleAuth();
+  }, {
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
+  })
 
-  const onChange = e => {
-    if (e.target.name === "name") setName(e.target.value);
-    else if (e.target.name === "email") setEmail(e.target.value);
-    else if (e.target.name === "password") setPassword(e.target.value);
-    else if (e.target.name === "password2") setPassword2(e.target.value);
-  };
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [password2, setPassword2] = useState("");
+
+  // const onChange = e => {
+  //   if (e.target.name === "name") setName(e.target.value);
+  //   else if (e.target.name === "email") setEmail(e.target.value);
+  //   else if (e.target.name === "password") setPassword(e.target.value);
+  //   else if (e.target.name === "password2") setPassword2(e.target.value);
+  // };
 
 
   // const client = useApolloClient();
 
   // client.writeData({ data: { isAuth: true } })
 
-  // const [signUp] = useMutation(SIGNUP_MUTATION);
+  const [signUp, { loading, data, error }] = useMutation(
+    SIGNUP_MUTATION,
+    {
+      variables: values
+    }
+  );
 
 
   return (
@@ -35,32 +54,20 @@ const Register = () => {
             <p className="lead text-center">
               Create your DevConnector account
                 </p>
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                const userData = {
-                  name,
-                  email,
-                  password,
-                  password2
-                }
-                // signUp({ variables: userData });
-              }}
-              noValidate
-            >
+            <form onSubmit={handleSubmit} noValidate>
               <TextFieldGroup
                 placeholder="Name"
                 name="name"
-                value={name}
-                onChange={onChange}
+                value={values.name}
+                onChange={handleChange}
               // error={errors.name}
               />
               <TextFieldGroup
                 placeholder="Email Address"
                 name="email"
                 type="email"
-                value={email}
-                onChange={onChange}
+                value={values.email}
+                onChange={handleChange}
                 // error={errors.email}
                 info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
               />
@@ -68,16 +75,16 @@ const Register = () => {
                 placeholder="Password"
                 name="password"
                 type="password"
-                value={password}
-                onChange={onChange}
+                value={values.password}
+                onChange={handleChange}
               // error={errors.password}
               />
               <TextFieldGroup
                 placeholder="Confirm Password"
                 name="password2"
                 type="password"
-                value={password2}
-                onChange={onChange}
+                value={values.password2}
+                onChange={handleChange}
               // error={errors.password2}
               />
               <input type="submit" className="btn btn-info btn-block mt-4" />

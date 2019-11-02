@@ -1,16 +1,15 @@
 import React, { useContext, useEffect } from "react";
+import { Redirect } from 'react-router'
+import { useForm } from '../../hooks'
+import Spinner from '../common/Spinner';
+
 import { AuthContext } from '../../contexts/AuthContext';
 import TextFieldGroup from "../common/TextFieldGroup";
 
 import { SIGNIN_MUTATION } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
-import { Redirect } from 'react-router'
-import { useForm } from '../../hooks'
-import Spinner from '../common/Spinner';
-
 
 const Login = () => {
-
   const { values, handleChange, handleSubmit } = useForm(() => {
     signIn()
     toggleAuth();
@@ -21,16 +20,12 @@ const Login = () => {
 
   const { isAuthenticated, toggleAuth } = useContext(AuthContext);
 
-
-
   const [signIn, { loading, data, error }] = useMutation(
     SIGNIN_MUTATION,
     {
       variables: values
     }
   );
-
-
 
   if (loading) return <Spinner />
 
@@ -40,13 +35,13 @@ const Login = () => {
   // Store token if login is successful
   if (data) {
     window.localStorage.setItem('token', data.signIn.token)
+    window.localStorage.setItem('email', data.signIn.email)
     // Redirect to home page
     return <Redirect to='/dashboard' />
   }
   if (isAuthenticated) {
     return <Redirect to='/dashboard' />
   }
-
 
   return (
     <div>

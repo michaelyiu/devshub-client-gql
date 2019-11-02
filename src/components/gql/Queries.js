@@ -20,15 +20,34 @@ const GET_PROFILE = gql`
 	query ($email: String!) {
 		profile(email: $email) {
 			handle
-    	bio 
+    	bio
+			experience {
+				title
+				company
+				location
+				from
+				to
+				current
+				description
+			}
+			education {
+				school
+				degree
+				fieldOfStudy
+				from
+				to
+				current
+				description
+			}
 		}
 	}
 `
 
+
 export {
 	ISLOGGEDIN_QUERY,
 	GET_CURRENT_USER,
-	GET_PROFILE
+	GET_PROFILE,
 };
 
 

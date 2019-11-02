@@ -12,7 +12,6 @@ const AuthContextProvider = (props) => {
 		const localData = localStorage.getItem('currentUser');
 		return localData ? JSON.parse(localData) : {};
 	})
-
 	//Methods to change states
 	const toggleAuth = () => {
 		setAuth(!isAuthenticated)

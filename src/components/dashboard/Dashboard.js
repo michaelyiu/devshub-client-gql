@@ -1,21 +1,22 @@
 import React, { useEffect, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
+import Spinner from '../common/Spinner';
 
 import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
 
 import { useQuery } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 
-const Dashboard = () => {
-  const { isAuthenticated, addCurrentUser } = useContext(AuthContext);
+import Experience from "./Experience";
+import Education from "./Education";
 
-  let history = useHistory();
+const Dashboard =  () => {
+	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
+	
+	let history = useHistory();
+	
+	const loggedInEmail =  localStorage.getItem("email");
 
-	//grab user info from apollo cache. or query for it. currentUser data should probably be completely cached
-	// const [user, setUser] = useState({name: "", email:""})
-	// const [education, setEducation] = useState();
-	// const [experience, setExperience] = useState();
-	let dashboardContent;
 	// If loading, load spinner, otherwise load actual content
 	/*
 		if(profile === null || loading) {
@@ -23,20 +24,20 @@ const Dashboard = () => {
 		}
 	*/
 	const { 
-		data: currentUser, 
+		data: currentUserData, 
 		loading: currentUserLoading, 
 		error: currentUserError 
 	} = useQuery(
     GET_CURRENT_USER,
     {
       variables: {
-        email: "onew1ng3d@hotmail.com"
+        email: loggedInEmail
       }
     }
 	);
 
-	if(currentUser && currentUser.user)
-		addCurrentUser(currentUser.user)
+	if(currentUserData && currentUserData.user)
+		addCurrentUser(currentUserData.user)
 
   const { 
 		data: userProfile, 
@@ -46,26 +47,39 @@ const Dashboard = () => {
     GET_PROFILE,
     {
       variables: {
-        email: "onew1ng3d@hotmail.com"
+        email: loggedInEmail
       }
     }
-  );
+	);
 
 
 
-useEffect(() => {
-	if(!isAuthenticated){
-    history.push("/login");
-	} else{
-		//if the user is authenticated
 
-	}
-})
 
-	// const { loading, error, data } = useQuery(CURRENT_USER_QUERY, {
-	// 	variables: { email: 'onew1ng3d@hotmail.com'}
-	// });
-	// console.log(data);
+	useEffect(() => {
+		if(!isAuthenticated){
+			history.push("/login");
+		} else{
+			//if the user is authenticated
+
+		}
+	})
+  if (currentUserLoading || userProfileLoading) return <Spinner />
+
+	let dashboardContent = (
+		<div>
+			<p className="lead text-name">Welcome {currentUser.name}</p>
+			<Experience />
+			<Education />
+			{/* <Experience experience={profile.experience} />
+			<Education education={profile.education} />
+			<div className="mt-5 mb-5">
+				<button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account</button>
+			</div> */}
+		</div>
+	)
+	console.log(userProfile)
+
 	return (
 		<div className="dashboard">
 			<div className="container">

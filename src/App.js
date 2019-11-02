@@ -16,6 +16,7 @@ import "./App.css";
 
 
 import AuthContextProvider from './contexts/AuthContext';
+import ProfileContextProvider from "./contexts/ProfileContext";
 
 import client from "./apollo";
 
@@ -25,77 +26,79 @@ const App = () => {
     <div className="App">
       <ApolloProvider client={client}>
         <AuthContextProvider>
+          <ProfileContextProvider>
 
-          <Router>
-            <GQLTest />
-            <Navbar />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+            <Router>
+              <GQLTest />
+              <Navbar />
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
 
 
-            <Route exact path="/dashboard" component={Dashboard} />
-            {/* <Route exact path="/" component={Landing} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              {/* <Route exact path="/" component={Landing} />
           <div className="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profiles" component={Profiles} />
-            <Route exact path="/profile/:handle" component={Profile} />
-            <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/profiles" component={Profiles} />
+          <Route exact path="/profile/:handle" component={Profile} />
+          <Switch>
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
             <Switch>
               <PrivateRoute
                 exact
                 path="/create-profile"
                 component={CreateProfile}
-              />
+                />
             </Switch>
             <Switch>
+            <PrivateRoute
+            exact
+            path="/edit-profile"
+            component={EditProfile}
+            />
+            </Switch>
+            <Switch>
+            <PrivateRoute
+            exact
+            path="/add-experience"
+            component={AddExperience}
+            />
+            </Switch>
+            <Switch>
+            <PrivateRoute
+            exact
+            path="/edit-experience/:exp_id"
+            component={EditExperience}
+            />
+            </Switch>
+            <Switch>
+            <PrivateRoute
+            exact
+            path="/add-education"
+            component={AddEducation}
+              />
+              </Switch>
+              <Switch>
               <PrivateRoute
-                exact
-                path="/edit-profile"
-                component={EditProfile}
+              exact
+              path="/edit-education/:edu_id"
+              component={EditEducation}
               />
-            </Switch>
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/add-experience"
-                component={AddExperience}
-              />
-            </Switch>
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/edit-experience/:exp_id"
-                component={EditExperience}
-              />
-            </Switch>
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/add-education"
-                component={AddEducation}
-              />
-            </Switch>
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/edit-education/:edu_id"
-                component={EditEducation}
-              />
-            </Switch>
-            <Switch>
+              </Switch>
+              <Switch>
               <PrivateRoute exact path="/feed" component={Posts} />
-            </Switch>
+              </Switch>
             <Switch>
-              <PrivateRoute exact path="/post/:id" component={Post} />
+            <PrivateRoute exact path="/post/:id" component={Post} />
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
           </div> */}
-            <Footer />
-          </Router>
+              <Footer />
+            </Router>
+          </ProfileContextProvider>
         </AuthContextProvider>
       </ApolloProvider>
     </div>
