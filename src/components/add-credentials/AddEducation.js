@@ -1,14 +1,25 @@
-import React, { useContext } from 'react'
-import { useForm } from '../../hooks'
+import React, { useContext } from 'react';
+import { useForm } from '../../hooks';
+import { Redirect } from 'react-router';
+import Spinner from '../common/Spinner';
 
 import { Link } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 
+import { CREATE_EDUCATION } from "../gql/Mutations";
+import { useMutation } from '@apollo/react-hooks';
+
+import { ProfileContext } from '../../contexts/ProfileContext';
+
 // import { addEducation } from '../../actions/profileActions';
 
 const AddEducation = () => {
+	const { education, addEducation } = useContext(ProfileContext);
+
 	const { values, handleChange, handleSubmit } = useForm(() => {
+		addEducation(values)
+		createEducation();
 	}, {
 		school: '',
 		degree: '',
@@ -17,16 +28,24 @@ const AddEducation = () => {
 		to: '',
 		current: false,
 		description: '',
-		errors: {},
-		disabled: false
+		// errors: {},
+		// disabled: false
 	})
 
+	const [createEducation, { loading, data, error }] = useMutation(
+		CREATE_EDUCATION,
+		{
+			variables: values
+		}
+	)
 
-	// componentWillReceiveProps(nextProps) {
-	// 	if (nextProps.errors) {
-	// 		this.setState({ errors: nextProps.errors });
-	// 	}
-	// }
+	if (loading) return <Spinner />
+	if (data) {
+		values.id = data.createEducation.id
+		return <Redirect to='/dashboard' />
+
+	}
+
 
 
 	// onCheck = (e) => {
@@ -36,7 +55,6 @@ const AddEducation = () => {
 	// 	})
 	// }
 
-	// const { errors } = this.state;
 
 	return (
 		<div className="add-education">
@@ -88,20 +106,20 @@ const AddEducation = () => {
 								// error={errors.to}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
-							<div className="form-check mb-4">
+							{/* <div className="form-check mb-4">
 								<input
 									type="checkbox"
 									className="form-check-input"
 									name="current"
 									value={values.current}
 									checked={values.current}
-									// onChange={handleCheck}
+									onChange={handleCheck}
 									id="current"
 								/>
 								<label htmlFor="current" className="form-check-label">
 									Current Job
                   </label>
-							</div>
+							</div> */}
 							<TextAreaFieldGroup
 								placeholder="Program Description"
 								name="description"

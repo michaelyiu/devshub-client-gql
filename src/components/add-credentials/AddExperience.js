@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { Redirect } from 'react-router'
-import { useForm } from '../../hooks'
+import React, { useContext } from 'react';
+import { useForm } from '../../hooks';
+import { Redirect } from 'react-router';
 import Spinner from '../common/Spinner';
 
 import { Link } from 'react-router-dom';
@@ -132,4 +132,4 @@ const AddExperience = () => {
 	)
 }
 
-export default AddExperience
+export default AddExperience;

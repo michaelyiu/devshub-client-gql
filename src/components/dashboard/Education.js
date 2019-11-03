@@ -20,6 +20,8 @@ const Education = () => {
 			</div>
 		</div>
 	))
+
+
 	return (
 		<div>
 			<h4 className="mb-4">Education Credentials</h4>
