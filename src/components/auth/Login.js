@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { Redirect } from 'react-router'
-import { useForm } from '../../hooks'
+import { Redirect } from 'react-router';
+import { useForm } from '../../hooks';
 import Spinner from '../common/Spinner';
 
 import { AuthContext } from '../../contexts/AuthContext';

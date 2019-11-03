@@ -11,6 +11,9 @@ const ProfileContextProvider = (props) => {
 		const localData = localStorage.getItem('education');
 		return localData ? JSON.parse(localData) : {};
 	})
+	const addExperience = (exp) => {
+		setExperience([...experience, exp])
+	}
 
 	useEffect(() => {
 		localStorage.setItem('experience', JSON.stringify(experience))
@@ -19,7 +22,7 @@ const ProfileContextProvider = (props) => {
 		localStorage.setItem('education', JSON.stringify(education))
 	}, [education])
 	return (
-		<ProfileContext.Provider value={{ experience, education, setExperience, setEducation }}>
+		<ProfileContext.Provider value={{ experience, education, addExperience, setExperience, setEducation }}>
 			{props.children}
 		</ProfileContext.Provider>
 	)

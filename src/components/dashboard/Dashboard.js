@@ -10,14 +10,15 @@ import { useHistory } from "react-router-dom";
 
 import Experience from "./Experience";
 import Education from "./Education";
+import ProfileActions from "./ProfileActions";
 
-const Dashboard =  () => {
+const Dashboard = () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
 	const { setExperience, setEducation } = useContext(ProfileContext);
-	
+
 	let history = useHistory();
-	
-	const loggedInEmail =  localStorage.getItem("email");
+
+	const loggedInEmail = localStorage.getItem("email");
 
 	// If loading, load spinner, otherwise load actual content
 	/*
@@ -25,37 +26,37 @@ const Dashboard =  () => {
 			dashboardContent = <Spinner />
 		}
 	*/
-	const { 
-		data: currentUserData, 
-		loading: currentUserLoading, 
-		error: currentUserError 
+	const {
+		data: currentUserData,
+		loading: currentUserLoading,
+		error: currentUserError
 	} = useQuery(
-    GET_CURRENT_USER,
-    {
-      variables: {
-        email: loggedInEmail
-      }
-    }
+		GET_CURRENT_USER,
+		{
+			variables: {
+				email: loggedInEmail
+			}
+		}
 	);
 
-	if(currentUserData && currentUserData.user)
+	if (currentUserData && currentUserData.user)
 		addCurrentUser(currentUserData.user)
 
-  const { 
-		data: userProfile, 
-		loading: userProfileLoading, 
-		error: userProfileError 
+	const {
+		data: userProfile,
+		loading: userProfileLoading,
+		error: userProfileError
 	} = useQuery(
-    GET_PROFILE,
-    {
-      variables: {
-        email: loggedInEmail
-      }
-    }
+		GET_PROFILE,
+		{
+			variables: {
+				email: loggedInEmail
+			},
+			fetchPolicy: 'network-only'
+		}
 	);
 
-	if (userProfile && userProfile.profile)
-	{
+	if (userProfile && userProfile.profile) {
 		setEducation(userProfile.profile.education)
 		setExperience(userProfile.profile.experience)
 	}
@@ -63,17 +64,18 @@ const Dashboard =  () => {
 
 
 	useEffect(() => {
-		if(!isAuthenticated){
+		if (!isAuthenticated) {
 			history.push("/login");
-		} else{
+		} else {
 			//if the user is authenticated
 
 		}
 	})
-  if (currentUserLoading || userProfileLoading) return <Spinner />
+	if (currentUserLoading || userProfileLoading) return <Spinner />
 
 	let dashboardContent = (
 		<div>
+			<ProfileActions />
 			<p className="lead text-name">Welcome {currentUser.name}</p>
 			<Experience />
 			<Education />
@@ -84,7 +86,6 @@ const Dashboard =  () => {
 			</div> */}
 		</div>
 	)
-	console.log(userProfile)
 
 	return (
 		<div className="dashboard">
