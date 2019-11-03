@@ -22,6 +22,7 @@ import client from "./apollo";
 
 import CreateProfile from "./components/add-credentials/CreateProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
+import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 
 
@@ -44,6 +45,7 @@ const App = () => {
               <Route exact path="/edit-profile" component={CreateProfile} />
               <Route exact path="/add-experience" component={AddExperience} />
               <Route exact path="/add-education" component={AddEducation} />
+              <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
               {/* <Route exact path="/" component={Landing} />
           <div className="container">
           <Route exact path="/register" component={Register} />
