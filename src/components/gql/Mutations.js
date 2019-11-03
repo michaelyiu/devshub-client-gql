@@ -53,11 +53,27 @@ const CREATE_EXPERIENCE = gql`
 	}
 `
 
+const EDIT_EXPERIENCE = gql`
+	mutation editExperience($id: ID!, $title: String!, $company: String!, $location: String!, $from: String!, $to: String, $current: Boolean, $description: String ){
+		editExperience(id: $id, title: $title, company: $company, location: $location, from: $from, to: $to, current: $current, description:$description){
+			id
+			title
+			company
+			location
+			from
+			to
+			current
+			description
+		}
+	}
+`
+
 
 export {
 	ISLOGGEDIN_MUTATION,
 	SIGNIN_MUTATION,
 	SIGNUP_MUTATION,
-	CREATE_EDUCATION,
 	CREATE_EXPERIENCE,
+	EDIT_EXPERIENCE,
+	CREATE_EDUCATION,
 };

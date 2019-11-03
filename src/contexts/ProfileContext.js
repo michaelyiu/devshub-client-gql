@@ -16,9 +16,12 @@ const ProfileContextProvider = (props) => {
 	}
 
 	const findExpById = (exp_id) => {
-		const exp = experience.find(({ id }) => id === exp_id);
-		console.log(exp)
-		// return
+		return experience.find(({ id }) => id === exp_id);
+	}
+
+	const findAndUpdate = (exp_id, newExp) => {
+		const currentExpIndex = experience.indexOf(findExpById(exp_id));
+		experience[currentExpIndex] = newExp;
 	}
 
 	const addEducation = (edu) => {
@@ -32,7 +35,7 @@ const ProfileContextProvider = (props) => {
 		localStorage.setItem('education', JSON.stringify(education))
 	}, [education])
 	return (
-		<ProfileContext.Provider value={{ experience, education, addExperience, setExperience, findExpById, setEducation, addEducation }}>
+		<ProfileContext.Provider value={{ experience, education, addExperience, setExperience, findExpById, findAndUpdate, setEducation, addEducation }}>
 			{props.children}
 		</ProfileContext.Provider>
 	)

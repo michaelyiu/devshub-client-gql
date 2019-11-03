@@ -7,40 +7,43 @@ import { Link, useParams } from 'react-router-dom';
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 
-import { CREATE_EXPERIENCE } from "../gql/Mutations";
+import { EDIT_EXPERIENCE } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
 import { ProfileContext } from '../../contexts/ProfileContext';
 
 // import { addExperience } from '../../actions/profileActions';
+const moment = require('moment');
 
 const AddExperience = () => {
-	const { experience, addExperience, findExpById } = useContext(ProfileContext);
+	const { experience, addExperience, findExpById, findAndUpdate } = useContext(ProfileContext);
+	const { exp_id } = useParams();
+	const expToEdit = findExpById(exp_id);
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
-		addExperience(values)
-		createExperience();
+		findAndUpdate(exp_id, values)
+		editExperience();
 	}, {
-		company: '',
-		title: '',
-		location: '',
-		from: '',
-		to: '',
-		current: false,
-		description: '',
+		id: expToEdit.id,
+		company: expToEdit.company ? expToEdit.company : '',
+		title: expToEdit.title ? expToEdit.title : '',
+		location: expToEdit.location ? expToEdit.location : '',
+		from: expToEdit.from ? moment.unix((expToEdit.from / 1000)).format('YYYY-MM-DD') : '',
+		to: expToEdit.to ? moment.unix(expToEdit.to / 1000).format('YYYY-MM-DD') : '',
+		current: expToEdit.current ? expToEdit.current : false,
+		description: expToEdit.description ? expToEdit.description : '',
 		// errors: {},
 		// disabled: false
 	})
 
-	const { exp_id } = useParams();
-	findExpById(exp_id);
+
 	//1. getExperience from state using ID
 	//this.props.getExperience(this.props.match.params.exp_id);
 
 	//set all the stuff into values
 
-	const [createExperience, { loading, data, error }] = useMutation(
-		CREATE_EXPERIENCE,
+	const [editExperience, { loading, data, error }] = useMutation(
+		EDIT_EXPERIENCE,
 		{
 			variables: values
 		}
@@ -48,7 +51,7 @@ const AddExperience = () => {
 
 	if (loading) return <Spinner />
 	if (data) {
-		values.id = data.createExperience.id
+		// values.id = data.editExperience.id
 		return <Redirect to='/dashboard' />
 
 	}
