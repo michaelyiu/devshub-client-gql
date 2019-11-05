@@ -24,6 +24,7 @@ import CreateProfile from "./components/add-credentials/CreateProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
 import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
+import EditEducation from "./components/add-credentials/EditEducation";
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
               <Route exact path="/add-experience" component={AddExperience} />
               <Route exact path="/add-education" component={AddEducation} />
               <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
+              <Route exact path="/edit-education/:edu_id" component={EditEducation} />
               {/* <Route exact path="/" component={Landing} />
           <div className="container">
           <Route exact path="/register" component={Register} />

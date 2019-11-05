@@ -16,12 +16,12 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 const moment = require('moment');
 
 const AddExperience = () => {
-	const { experience, addExperience, findExpById, findAndUpdate } = useContext(ProfileContext);
+	const { findExpById, findExpAndUpdate } = useContext(ProfileContext);
 	const { exp_id } = useParams();
 	const expToEdit = findExpById(exp_id);
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
-		findAndUpdate(exp_id, values)
+		findExpAndUpdate(exp_id, values)
 		editExperience();
 	}, {
 		id: expToEdit.id,
@@ -36,11 +36,6 @@ const AddExperience = () => {
 		// disabled: false
 	})
 
-
-	//1. getExperience from state using ID
-	//this.props.getExperience(this.props.match.params.exp_id);
-
-	//set all the stuff into values
 
 	const [editExperience, { loading, data, error }] = useMutation(
 		EDIT_EXPERIENCE,
@@ -134,6 +129,8 @@ const AddExperience = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
+						{/* supress warning for non usage for now */}
+						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>
 			</div>

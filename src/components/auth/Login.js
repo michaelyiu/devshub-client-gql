@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Redirect } from 'react-router';
 import { useForm } from '../../hooks';
 import Spinner from '../common/Spinner';
@@ -24,7 +24,7 @@ const Login = () => {
     SIGNIN_MUTATION,
     {
       variables: values
-    }
+    },
   );
 
   if (loading) return <Spinner />
@@ -76,6 +76,8 @@ const Login = () => {
                 <input type="submit" className="btn btn-info btn-block mt-4" />
 
               </form>
+              {/* supress warning for non usage for now */}
+              {error && <p data-testid="login-error">{error.message}</p>}
             </div>
           </div>
         </div>

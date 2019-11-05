@@ -14,7 +14,7 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 
 
 const AddExperience = () => {
-	const { experience, addExperience } = useContext(ProfileContext);
+	const { addExperience } = useContext(ProfileContext);
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		addExperience(values)
@@ -126,6 +126,8 @@ const AddExperience = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
+						{/* supress warning for non usage for now */}
+						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>
 			</div>

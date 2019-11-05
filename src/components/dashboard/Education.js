@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ProfileContext } from '../../contexts/ProfileContext';
 
+import { Link } from 'react-router-dom';
+
 import Moment from "react-moment";
 const moment = require('moment');
 
@@ -15,7 +17,7 @@ const Education = () => {
 				<Moment format="YYYY/MM/DD">{moment.unix(edu.from / 1000)}</Moment> - {edu.to === null ? ('Now') : <Moment format="YYYY/MM/DD">{moment.unix(edu.to / 1000)}</Moment>}
 			</div>
 			<div className="edu-column buttonGroup">
-				{/* <Link to={`/edit-education/${edu._id}`} className="btn btn-primary btn-custom">Edit</Link> */}
+				<Link to={`/edit-education/${edu.id}`} className="btn btn-primary btn-custom">Edit</Link>
 				{/* <button onClick={() => this.onDeleteClick(edu._id)} className="btn btn-danger btn-custom">Delete</button> */}
 			</div>
 		</div>

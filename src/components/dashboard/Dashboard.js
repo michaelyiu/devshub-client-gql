@@ -61,8 +61,6 @@ const Dashboard = () => {
 		setExperience(userProfile.profile.experience)
 	}
 
-
-
 	useEffect(() => {
 		if (!isAuthenticated) {
 			history.push("/login");
