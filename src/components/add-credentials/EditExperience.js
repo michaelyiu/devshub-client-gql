@@ -44,6 +44,11 @@ const AddExperience = () => {
 		}
 	)
 
+	let errors;
+	if (!loading && error) {
+		errors = error.graphQLErrors[0].extensions.exception.errors;
+	}
+
 	if (loading) return <Spinner />
 	if (data) {
 		// values.id = data.editExperience.id
@@ -72,21 +77,21 @@ const AddExperience = () => {
 								name="company"
 								value={values.company}
 								onChange={handleChange}
-							// error={errors.company}
+								error={errors && errors.company ? errors.company : null}
 							/>
 							<TextFieldGroup
 								placeholder="* Job Title"
 								name="title"
 								value={values.title}
 								onChange={handleChange}
-							// error={errors.title}
+								error={errors && errors.title ? errors.title : null}
 							/>
 							<TextFieldGroup
 								placeholder="Location"
 								name="location"
 								value={values.location}
 								onChange={handleChange}
-							// error={errors.location}
+								error={errors && errors.location ? errors.location : null}
 							/>
 							<h6>From Date</h6>
 							<TextFieldGroup
@@ -94,7 +99,7 @@ const AddExperience = () => {
 								type="date"
 								value={values.from}
 								onChange={handleChange}
-							// error={errors.from}
+								error={errors ? errors.from : null}
 							/>
 							<h6>To Date</h6>
 							<TextFieldGroup
@@ -102,7 +107,7 @@ const AddExperience = () => {
 								type="date"
 								value={values.to}
 								onChange={handleChange}
-								// error={errors.to}
+								error={errors ? errors.to : null}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
 							{/* <div className="form-check mb-4">
@@ -124,7 +129,7 @@ const AddExperience = () => {
 								name="description"
 								value={values.description}
 								onChange={handleChange}
-								// error={errors.description}
+								error={errors && errors.description ? errors.description : null}
 								info="Tell us about the position"
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />

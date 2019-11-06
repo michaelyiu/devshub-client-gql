@@ -28,11 +28,11 @@ const Experience = () => {
 	)
 
 	const [profileQuery,
-		// {
-		// 	data: userProfile,
-		// 	loading: userProfileLoading,
-		// 	error: userProfileError
-		// }
+		{
+			data: userProfile,
+			loading: userProfileLoading,
+			error: userProfileError
+		}
 	] = useLazyQuery(
 		GET_PROFILE,
 		{

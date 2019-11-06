@@ -39,11 +39,15 @@ const AddEducation = () => {
 		}
 	)
 
+	let errors;
+	if (!loading && error) {
+		errors = error.graphQLErrors[0].extensions.exception.errors;
+	}
+
 	if (loading) return <Spinner />
 	if (data) {
 		values.id = data.createEducation.id
 		return <Redirect to='/dashboard' />
-
 	}
 
 
@@ -73,21 +77,21 @@ const AddEducation = () => {
 								name="school"
 								value={values.school}
 								onChange={handleChange}
-							// error={errors.school}
+								error={errors && errors.school ? errors.school : null}
 							/>
 							<TextFieldGroup
 								placeholder="* Degree of Certification"
 								name="degree"
 								value={values.degree}
 								onChange={handleChange}
-							// error={errors.degree}
+								error={errors && errors.degree ? errors.degree : null}
 							/>
 							<TextFieldGroup
 								placeholder="Field of Study"
 								name="fieldOfStudy"
 								value={values.fieldOfStudy}
 								onChange={handleChange}
-							// error={errors.fieldOfStudy}
+								error={errors && errors.fieldOfStudy ? errors.fieldOfStudy : null}
 							/>
 							<h6>From Date</h6>
 							<TextFieldGroup
@@ -95,7 +99,7 @@ const AddEducation = () => {
 								type="date"
 								value={values.from}
 								onChange={handleChange}
-							// error={errors.from}
+								error={errors ? errors.from : null}
 							/>
 							<h6>To Date</h6>
 							<TextFieldGroup
@@ -103,7 +107,7 @@ const AddEducation = () => {
 								type="date"
 								value={values.to}
 								onChange={handleChange}
-								// error={errors.to}
+								error={errors ? errors.to : null}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
 							{/* <div className="form-check mb-4">
@@ -125,7 +129,7 @@ const AddEducation = () => {
 								name="description"
 								value={values.description}
 								onChange={handleChange}
-								// error={errors.description}
+								error={errors && errors.description ? errors.description : null}
 								info="Tell us about the program you were in"
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
