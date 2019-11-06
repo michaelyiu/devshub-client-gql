@@ -83,6 +83,19 @@ const EDIT_EDUCATION = gql`
 	}
 `
 
+
+const DELETE_EXPERIENCE = gql`
+	mutation deleteExperience($id: ID!){
+		deleteExperience(id: $id)
+	}
+`;
+
+const DELETE_EDUCATION = gql`
+	mutation deleteEducation($id: ID!){
+		deleteEducation(id: $id)
+	}
+`;
+
 export {
 	ISLOGGEDIN_MUTATION,
 	SIGNIN_MUTATION,
@@ -90,5 +103,7 @@ export {
 	CREATE_EXPERIENCE,
 	EDIT_EXPERIENCE,
 	CREATE_EDUCATION,
-	EDIT_EDUCATION
+	EDIT_EDUCATION,
+	DELETE_EXPERIENCE,
+	DELETE_EDUCATION
 };

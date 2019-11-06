@@ -52,14 +52,18 @@ const Dashboard = () => {
 			variables: {
 				email: loggedInEmail
 			},
+			onCompleted() {
+				setEducation(userProfile.profile.education)
+				setExperience(userProfile.profile.experience)
+			},
 			fetchPolicy: 'network-only'
 		}
 	);
 
-	if (userProfile && userProfile.profile) {
-		setEducation(userProfile.profile.education)
-		setExperience(userProfile.profile.experience)
-	}
+	// if (userProfile && userProfile.profile) {
+	// 	setEducation(userProfile.profile.education)
+	// 	setExperience(userProfile.profile.experience)
+	// }
 
 	useEffect(() => {
 		if (!isAuthenticated) {
@@ -69,6 +73,7 @@ const Dashboard = () => {
 
 		}
 	})
+
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 
 	let dashboardContent = (

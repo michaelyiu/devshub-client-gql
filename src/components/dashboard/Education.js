@@ -7,7 +7,7 @@ import Moment from "react-moment";
 const moment = require('moment');
 
 const Education = () => {
-	const { education } = useContext(ProfileContext);
+	const { education, deleteEducation } = useContext(ProfileContext);
 
 	const eduJSX = education.map(edu => (
 		<div key={edu.id} className="flex-container edu-row">
@@ -18,7 +18,7 @@ const Education = () => {
 			</div>
 			<div className="edu-column buttonGroup">
 				<Link to={`/edit-education/${edu.id}`} className="btn btn-primary btn-custom">Edit</Link>
-				{/* <button onClick={() => this.onDeleteClick(edu._id)} className="btn btn-danger btn-custom">Delete</button> */}
+				<button onClick={() => deleteEducation(edu.id)} className="btn btn-danger btn-custom">Delete</button>
 			</div>
 		</div>
 	))
