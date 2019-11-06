@@ -53,8 +53,10 @@ const Dashboard = () => {
 				email: loggedInEmail
 			},
 			onCompleted() {
-				setEducation(userProfile.profile.education)
-				setExperience(userProfile.profile.experience)
+				if (userProfile && userProfile.profile) {
+					setExperience(userProfile.profile.experience)
+					setEducation(userProfile.profile.education)
+				}
 			},
 			fetchPolicy: 'network-only'
 		}

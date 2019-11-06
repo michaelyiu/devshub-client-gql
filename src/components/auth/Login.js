@@ -12,7 +12,6 @@ import { useMutation } from '@apollo/react-hooks';
 const Login = () => {
   const { values, handleChange, handleSubmit } = useForm(() => {
     signIn()
-    toggleAuth();
   }, {
     email: '',
     password: ''
@@ -23,13 +22,20 @@ const Login = () => {
   const [signIn, { loading, data, error }] = useMutation(
     SIGNIN_MUTATION,
     {
-      variables: values
-    },
+      variables: values,
+      onCompleted(data) {
+        if (data && data.signIn)
+          toggleAuth();
+      },
+
+    }
   );
 
-  if (loading) return <Spinner />
-
-  // Show error message if mutation fails
+  let errors;
+  if (!loading && error) {
+    errors = error.graphQLErrors[0].extensions.exception.errors;
+  }
+  // if (loading) return <Spinner />
   // if (error) return <Error message={error.message} />
 
   // Store token if login is successful
@@ -61,7 +67,7 @@ const Login = () => {
                   type="email"
                   value={values.email}
                   onChange={handleChange}
-                // error={errors.email}
+                  error={errors && errors.email ? errors.email : null}
                 />
 
                 <TextFieldGroup
@@ -70,7 +76,7 @@ const Login = () => {
                   type="password"
                   value={values.password}
                   onChange={handleChange}
-                // error={errors.password}
+                  error={errors && errors.password ? errors.password : null}
                 />
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />

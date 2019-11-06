@@ -19,7 +19,6 @@ const Register = () => {
     password2: ''
   })
 
-
   const [signUp, { loading, data, error }] = useMutation(
     SIGNUP_MUTATION,
     {
@@ -27,7 +26,12 @@ const Register = () => {
     }
   );
 
-  if (loading) return <Spinner />
+  let errors;
+  if (!loading && error) {
+    errors = error.graphQLErrors[0].extensions.exception.errors;
+  }
+
+  // if (loading) return <Spinner />
 
   // Show error message if mutation fails
   // if (error) return <Error message={error.message} />
@@ -53,7 +57,7 @@ const Register = () => {
                 name="name"
                 value={values.name}
                 onChange={handleChange}
-              // error={errors.name}
+                error={errors && errors.name ? errors.name : null}
               />
               <TextFieldGroup
                 placeholder="Email Address"
@@ -61,7 +65,7 @@ const Register = () => {
                 type="email"
                 value={values.email}
                 onChange={handleChange}
-                // error={errors.email}
+                error={errors && errors.email ? errors.email : null}
                 info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
               />
               <TextFieldGroup
@@ -70,7 +74,7 @@ const Register = () => {
                 type="password"
                 value={values.password}
                 onChange={handleChange}
-              // error={errors.password}
+                error={errors && errors.password ? errors.password : null}
               />
               <TextFieldGroup
                 placeholder="Confirm Password"
@@ -78,7 +82,7 @@ const Register = () => {
                 type="password"
                 value={values.password2}
                 onChange={handleChange}
-              // error={errors.password2}
+                error={errors && errors.password2 ? errors.password2 : null}
               />
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
