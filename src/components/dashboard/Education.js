@@ -3,11 +3,49 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 
 import { Link } from 'react-router-dom';
 
+import { DELETE_EDUCATION } from "../gql/Mutations";
+import { GET_PROFILE } from "../gql/Queries";
+
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+
 import Moment from "react-moment";
 const moment = require('moment');
 
 const Education = () => {
 	const { education, deleteEducation } = useContext(ProfileContext);
+	const loggedInEmail = localStorage.getItem("email");
+
+	const [onDeleteHandler, { data, loading, error }] = useMutation(
+		DELETE_EDUCATION,
+		{
+			onCompleted(data) {
+				if (data && data.deleteEducation) {
+					deleteEducation(data.deleteEducation);
+					profileQuery();
+				}
+			}
+		}
+	)
+
+	const [profileQuery,
+		{
+			data: userProfile,
+			loading: userProfileLoading,
+			error: userProfileError
+		}
+	] = useLazyQuery(
+		GET_PROFILE,
+		{
+			variables: {
+				email: loggedInEmail
+			},
+			fetchPolicy: 'network-only',
+		}
+	);
+
+	const onClickHandler = async (edu_id) => {
+		onDeleteHandler({ variables: { id: edu_id } });
+	}
 
 	const eduJSX = education.map(edu => (
 		<div key={edu.id} className="flex-container edu-row">
@@ -18,11 +56,10 @@ const Education = () => {
 			</div>
 			<div className="edu-column buttonGroup">
 				<Link to={`/edit-education/${edu.id}`} className="btn btn-primary btn-custom">Edit</Link>
-				<button onClick={() => deleteEducation(edu.id)} className="btn btn-danger btn-custom">Delete</button>
+				<button onClick={async () => onClickHandler(edu.id)} className="btn btn-danger btn-custom">Delete</button>
 			</div>
 		</div>
 	))
-
 
 	return (
 		<div>

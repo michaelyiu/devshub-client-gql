@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ProfileContext } from '../../contexts/ProfileContext';
 
 import { Link } from 'react-router-dom';
@@ -11,10 +11,10 @@ import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import Moment from "react-moment";
 const moment = require('moment');
 
-
-
 const Experience = () => {
-	const { experience, deleteExperience, setExperience } = useContext(ProfileContext);
+	const { experience, deleteExperience } = useContext(ProfileContext);
+	const loggedInEmail = localStorage.getItem("email");
+
 	const [onDeleteHandler, { data, loading, error }] = useMutation(
 		DELETE_EXPERIENCE,
 		{
@@ -24,13 +24,8 @@ const Experience = () => {
 					profileQuery();
 				}
 			}
-
 		}
 	)
-	const onClickHandler = async (exp_id) => {
-		onDeleteHandler({ variables: { id: exp_id } });
-	}
-	const loggedInEmail = localStorage.getItem("email");
 
 	const [profileQuery,
 		{
@@ -44,15 +39,13 @@ const Experience = () => {
 			variables: {
 				email: loggedInEmail
 			},
-
 			fetchPolicy: 'network-only',
-
 		}
 	);
 
-	useEffect(() => {
-		console.log(experience)
-	}, [experience])
+	const onClickHandler = async (exp_id) => {
+		onDeleteHandler({ variables: { id: exp_id } });
+	}
 
 	const expJSX = experience.map(exp => (
 		<div key={exp.id} className="flex-container exp-row">
@@ -63,12 +56,10 @@ const Experience = () => {
 			</div>
 			<div className="exp-column buttonGroup">
 				<Link to={`/edit-experience/${exp.id}`} className="btn btn-primary btn-custom">Edit</Link>
-				<button onClick={async () => onClickHandler(exp.id)} className="btn btn-danger btn-custom">Delete
-				</button>
+				<button onClick={async () => onClickHandler(exp.id)} className="btn btn-danger btn-custom">Delete</button>
 			</div>
 		</div>
 	))
-
 
 	return (
 		<div>
