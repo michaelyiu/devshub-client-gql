@@ -15,7 +15,7 @@ const Experience = () => {
 	const { experience, deleteExperience } = useContext(ProfileContext);
 	const loggedInEmail = localStorage.getItem("email");
 
-	const [onDeleteHandler, { data, loading, error }] = useMutation(
+	const [onDeleteHandler,/* { data, loading, error }*/] = useMutation(
 		DELETE_EXPERIENCE,
 		{
 			onCompleted(data) {
@@ -28,11 +28,11 @@ const Experience = () => {
 	)
 
 	const [profileQuery,
-		{
-			data: userProfile,
-			loading: userProfileLoading,
-			error: userProfileError
-		}
+		// {
+		// 	data: userProfile,
+		// 	loading: userProfileLoading,
+		// 	error: userProfileError
+		// }
 	] = useLazyQuery(
 		GET_PROFILE,
 		{

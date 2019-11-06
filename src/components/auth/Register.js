@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Redirect } from 'react-router';
 import { useForm } from '../../hooks'
 import Spinner from '../common/Spinner';
 
@@ -10,8 +11,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 const Register = () => {
   const { values, handleChange, handleSubmit } = useForm(() => {
-    // signIn()
-    // toggleAuth();
+    signUp();
   }, {
     name: '',
     email: '',
@@ -19,22 +19,6 @@ const Register = () => {
     password2: ''
   })
 
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [password2, setPassword2] = useState("");
-
-  // const onChange = e => {
-  //   if (e.target.name === "name") setName(e.target.value);
-  //   else if (e.target.name === "email") setEmail(e.target.value);
-  //   else if (e.target.name === "password") setPassword(e.target.value);
-  //   else if (e.target.name === "password2") setPassword2(e.target.value);
-  // };
-
-
-  // const client = useApolloClient();
-
-  // client.writeData({ data: { isAuth: true } })
 
   const [signUp, { loading, data, error }] = useMutation(
     SIGNUP_MUTATION,
@@ -43,6 +27,15 @@ const Register = () => {
     }
   );
 
+  if (loading) return <Spinner />
+
+  // Show error message if mutation fails
+  // if (error) return <Error message={error.message} />
+
+  if (data) {
+    // Redirect to home page
+    return <Redirect to='/login' />
+  }
 
   return (
 
@@ -89,6 +82,7 @@ const Register = () => {
               />
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
+            {error && <p data-testid="login-error">{error.message}</p>}
           </div>
         </div>
       </div>

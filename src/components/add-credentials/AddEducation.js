@@ -15,7 +15,7 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 // import { addEducation } from '../../actions/profileActions';
 
 const AddEducation = () => {
-	const { education, addEducation } = useContext(ProfileContext);
+	const { addEducation } = useContext(ProfileContext);
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		addEducation(values)
