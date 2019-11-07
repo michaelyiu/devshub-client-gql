@@ -47,6 +47,12 @@ const ProfileContextProvider = (props) => {
 		setEducation(education.filter(edu => edu.id !== edu_id))
 	}
 
+	const clearProfile = () => {
+		setExperience([]);
+		setEducation([]);
+		console.log(experience);
+	}
+
 	useEffect(() => {
 		localStorage.setItem('experience', JSON.stringify(experience))
 	}, [experience])
@@ -54,7 +60,7 @@ const ProfileContextProvider = (props) => {
 		localStorage.setItem('education', JSON.stringify(education))
 	}, [education])
 	return (
-		<ProfileContext.Provider value={{ experience, education, setExperience, setEducation, addExperience, addEducation, findExpById, findEduById, findExpAndUpdate, findEduAndUpdate, deleteExperience, deleteEducation }}>
+		<ProfileContext.Provider value={{ experience, education, setExperience, setEducation, addExperience, addEducation, findExpById, findEduById, findExpAndUpdate, findEduAndUpdate, deleteExperience, deleteEducation, clearProfile }}>
 			{props.children}
 		</ProfileContext.Provider>
 	)
