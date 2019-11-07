@@ -21,6 +21,7 @@ import ProfileContextProvider from "./contexts/ProfileContext";
 import client from "./apollo";
 
 import CreateProfile from "./components/add-credentials/CreateProfile";
+import EditProfile from "./components/add-credentials/EditProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
 import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
@@ -43,7 +44,8 @@ const App = () => {
 
 
               <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/edit-profile" component={CreateProfile} />
+              <Route exact path="/create-profile" component={CreateProfile} />
+              <Route exact path="/edit-profile" component={EditProfile} />
               <Route exact path="/add-experience" component={AddExperience} />
               <Route exact path="/add-education" component={AddEducation} />
               <Route exact path="/edit-experience/:exp_id" component={EditExperience} />

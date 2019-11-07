@@ -6,7 +6,7 @@ import Spinner from '../common/Spinner';
 import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
 
 import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import Experience from "./Experience";
 import Education from "./Education";
@@ -75,22 +75,35 @@ const Dashboard = () => {
 
 		}
 	})
-
+	let dashboardContent;
 	if (currentUserLoading || userProfileLoading) return <Spinner />
-
-	let dashboardContent = (
-		<div>
-			<ProfileActions />
-			<p className="lead text-name">Welcome {currentUser.name}</p>
-			<Experience />
-			<Education />
-			{/* <Experience experience={profile.experience} />
+	else {
+		if (userProfile && userProfile.profile && Object.keys(userProfile.profile).length > 0) {
+			dashboardContent = (
+				<div>
+					<ProfileActions />
+					<p className="lead text-name">Welcome {currentUser.name}</p>
+					<Experience />
+					<Education />
+					{/* <Experience experience={profile.experience} />
 			<Education education={profile.education} />
 			<div className="mt-5 mb-5">
 				<button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account</button>
 			</div> */}
-		</div>
-	)
+				</div>
+			)
+		} else {
+			dashboardContent = (
+				<div>
+					<div className="lead text-name">Welcome {currentUser.name}</div>
+					<Link to="/create-profile" className="btn btn-lg btn-info">
+						Create Profile
+            </Link>
+				</div>
+			)
+		}
+
+	}
 
 	return (
 		<div className="dashboard">
