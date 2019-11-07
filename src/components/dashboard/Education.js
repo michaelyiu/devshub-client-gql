@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { EducationContext } from '../../contexts/EducationContext';
 
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import Moment from "react-moment";
 const moment = require('moment');
 
 const Education = () => {
-	const { education, deleteEducation } = useContext(ProfileContext);
+	const { education, deleteEducation } = useContext(EducationContext);
 	const loggedInEmail = localStorage.getItem("email");
 
 	const [onDeleteHandler, /*{ data, loading, error }*/] = useMutation(
@@ -28,11 +28,11 @@ const Education = () => {
 	)
 
 	const [profileQuery,
-		{
-			data: userProfile,
-			loading: userProfileLoading,
-			error: userProfileError
-		}
+		// {
+		// 	data: userProfile,
+		// 	loading: userProfileLoading,
+		// 	error: userProfileError
+		// }
 	] = useLazyQuery(
 		GET_PROFILE,
 		{

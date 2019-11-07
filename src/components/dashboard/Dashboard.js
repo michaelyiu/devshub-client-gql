@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { ExperienceContext } from '../../contexts/ExperienceContext';
+import { EducationContext } from '../../contexts/EducationContext';
 import Spinner from '../common/Spinner';
 
 import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
@@ -14,7 +15,8 @@ import ProfileActions from "./ProfileActions";
 
 const Dashboard = () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
-	const { setExperience, setEducation } = useContext(ProfileContext);
+	const { setExperience } = useContext(ExperienceContext);
+	const { setEducation } = useContext(EducationContext);
 
 	let history = useHistory();
 

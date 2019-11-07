@@ -1,14 +1,23 @@
 import React, { useContext } from 'react';
 import { useForm } from '../../hooks'
-
 import { Link } from 'react-router-dom';
+import Spinner from '../common/Spinner';
+
+import { UPDATE_PROFILE } from "../gql/Mutations";
+
 import TextFieldGroup from './../common/TextFieldGroup';
 import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 import InputGroup from './../common/InputGroup';
 import SelectListGroup from './../common/SelectListGroup';
+import { useMutation } from '@apollo/react-hooks';
+
+import { ProfileContext } from '../../contexts/ProfileContext';
 
 const CreateProfile = () => {
+	const { updateProfileState } = useContext(ProfileContext);
 	const { values, handleChange, handleSubmit } = useForm(() => {
+		updateProfile();
+		console.log(values);
 	}, {
 		displaySocialInputs: false,
 		handle: '',
@@ -24,15 +33,27 @@ const CreateProfile = () => {
 		linkedin: '',
 		youtube: '',
 		instagram: '',
-		errors: {}
+		// errors: {}
 	})
 
-	// componentWillReceiveProps(nextProps) {
-	// 	if (nextProps.errors) {
-	// 		this.setState({ errors: nextProps.errors })
-	// 	}
+	const [updateProfile, { loading, data, error }] = useMutation(
+		UPDATE_PROFILE,
+		{
+			variables: values
+		}
+	)
 
-	// }
+	let errors;
+	if (!loading && error) {
+		errors = error.graphQLErrors[0].extensions.exception.errors;
+	}
+
+	if (loading) return <Spinner />
+
+	if (data) {
+		console.log(data);
+	}
+	// const createProfile;
 
 	// onSubmit = (e) => {
 	// 	e.preventDefault();
@@ -150,7 +171,7 @@ const CreateProfile = () => {
 								name="handle"
 								value={values.handle}
 								onChange={handleChange}
-								// error={errors.handle}
+								error={errors && errors.handle ? errors.handle : null}
 								info="A unique handle for your profile URL. Your full name, company name, nickname"
 							/>
 							<SelectListGroup
@@ -158,7 +179,7 @@ const CreateProfile = () => {
 								name="status"
 								value={values.status}
 								onChange={handleChange}
-								// error={errors.status}
+								error={errors && errors.status ? errors.status : null}
 								options={options}
 								info="Give us an idea of where you are at in your career"
 							/>
@@ -167,7 +188,7 @@ const CreateProfile = () => {
 								name="company"
 								value={values.company}
 								onChange={handleChange}
-								// error={errors.company}
+								error={errors && errors.company ? errors.company : null}
 								info="Could be your own company or one you work for"
 							/>
 							<TextFieldGroup
@@ -175,7 +196,7 @@ const CreateProfile = () => {
 								name="website"
 								value={values.website}
 								onChange={handleChange}
-								// error={errors.website}
+								error={errors && errors.website ? errors.website : null}
 								info="Could be your own personal website or a company one"
 							/>
 							<TextFieldGroup
@@ -183,15 +204,15 @@ const CreateProfile = () => {
 								name="location"
 								value={values.location}
 								onChange={handleChange}
-								// error={errors.location}
-								info="City or city & province or state suggested (eg. Toronto, ON)"
+								error={errors && errors.location ? errors.location : null}
+								info="City or city &amp; province or state suggested (eg. Toronto, ON)"
 							/>
 							<TextFieldGroup
 								placeholder="* Skills"
 								name="skills"
 								value={values.skills}
 								onChange={handleChange}
-								// error={errors.skills}
+								error={errors && errors.skills ? errors.skills : null}
 								info="Please use comma separated values (eg. HTML,CSS,JavaScript,React,Redux)"
 							/>
 							<TextFieldGroup
@@ -199,7 +220,7 @@ const CreateProfile = () => {
 								name="githubUsername"
 								value={values.githubUsername}
 								onChange={handleChange}
-								// error={errors.githubUsername}
+								error={errors && errors.githubUsername ? errors.githubUsername : null}
 								info="If you want your latest repos and a Github link, include your username"
 							/>
 							<TextAreaFieldGroup
@@ -207,7 +228,7 @@ const CreateProfile = () => {
 								name="bio"
 								value={values.bio}
 								onChange={handleChange}
-								// error={errors.bio}
+								error={errors && errors.bio ? errors.bio : null}
 								info="Tell us a little about yourself"
 							/>
 							<div className="mp-3">
@@ -227,6 +248,8 @@ const CreateProfile = () => {
 							{socialInputs}
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
+						{/* supress warning for non usage for now */}
+						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>
 			</div>

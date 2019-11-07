@@ -10,11 +10,10 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { CREATE_EXPERIENCE } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
-import { ProfileContext } from '../../contexts/ProfileContext';
-
+import { ExperienceContext } from '../../contexts/ExperienceContext';
 
 const AddExperience = () => {
-	const { addExperience } = useContext(ProfileContext);
+	const { addExperience } = useContext(ExperienceContext);
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		addExperience(values)

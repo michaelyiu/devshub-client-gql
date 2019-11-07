@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { ExperienceContext } from '../../contexts/ExperienceContext';
 
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import Moment from "react-moment";
 const moment = require('moment');
 
 const Experience = () => {
-	const { experience, deleteExperience } = useContext(ProfileContext);
+	const { experience, deleteExperience } = useContext(ExperienceContext);
 	const loggedInEmail = localStorage.getItem("email");
 
 	const [onDeleteHandler,/* { data, loading, error }*/] = useMutation(
@@ -28,11 +28,11 @@ const Experience = () => {
 	)
 
 	const [profileQuery,
-		{
-			data: userProfile,
-			loading: userProfileLoading,
-			error: userProfileError
-		}
+		// {
+		// 	data: userProfile,
+		// 	loading: userProfileLoading,
+		// 	error: userProfileError
+		// }
 	] = useLazyQuery(
 		GET_PROFILE,
 		{

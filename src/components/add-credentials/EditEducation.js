@@ -10,13 +10,13 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { EDIT_EDUCATION } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { EducationContext } from '../../contexts/EducationContext';
 
 // import { addEducation } from '../../actions/profileActions';
 const moment = require('moment');
 
 const AddEducation = () => {
-	const { findEduById, findEduAndUpdate } = useContext(ProfileContext);
+	const { findEduById, findEduAndUpdate } = useContext(EducationContext);
 	const { edu_id } = useParams();
 	const eduToEdit = findEduById(edu_id);
 

@@ -10,13 +10,13 @@ import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import { EDIT_EXPERIENCE } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { ExperienceContext } from '../../contexts/ExperienceContext';
 
 // import { addExperience } from '../../actions/profileActions';
 const moment = require('moment');
 
 const AddExperience = () => {
-	const { findExpById, findExpAndUpdate } = useContext(ProfileContext);
+	const { findExpById, findExpAndUpdate } = useContext(ExperienceContext);
 	const { exp_id } = useParams();
 	const expToEdit = findExpById(exp_id);
 

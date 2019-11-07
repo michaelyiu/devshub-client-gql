@@ -26,6 +26,8 @@ import AddExperience from "./components/add-credentials/AddExperience";
 import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 import EditEducation from "./components/add-credentials/EditEducation";
+import ExperienceContextProvider from "./contexts/ExperienceContext";
+import EducationContextProvider from "./contexts/EducationContext";
 
 
 const App = () => {
@@ -34,23 +36,26 @@ const App = () => {
       <ApolloProvider client={client}>
         <AuthContextProvider>
           <ProfileContextProvider>
-
-            <Router>
-              <GQLTest />
-              <Navbar />
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
+            <ExperienceContextProvider>
+              <EducationContextProvider>
 
 
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/create-profile" component={CreateProfile} />
-              <Route exact path="/edit-profile" component={EditProfile} />
-              <Route exact path="/add-experience" component={AddExperience} />
-              <Route exact path="/add-education" component={AddEducation} />
-              <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
-              <Route exact path="/edit-education/:edu_id" component={EditEducation} />
-              {/* <Route exact path="/" component={Landing} />
+                <Router>
+                  <GQLTest />
+                  <Navbar />
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
+
+
+                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/create-profile" component={CreateProfile} />
+                  {/* <Route exact path="/edit-profile" component={EditProfile} /> */}
+                  <Route exact path="/add-experience" component={AddExperience} />
+                  <Route exact path="/add-education" component={AddEducation} />
+                  <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
+                  <Route exact path="/edit-education/:edu_id" component={EditEducation} />
+                  {/* <Route exact path="/" component={Landing} />
           <div className="container">
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
@@ -109,8 +114,10 @@ const App = () => {
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
           </div> */}
-              <Footer />
-            </Router>
+                  <Footer />
+                </Router>
+              </EducationContextProvider>
+            </ExperienceContextProvider>
           </ProfileContextProvider>
         </AuthContextProvider>
       </ApolloProvider>
