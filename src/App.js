@@ -26,6 +26,8 @@ import AddExperience from "./components/add-credentials/AddExperience";
 import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 import EditEducation from "./components/add-credentials/EditEducation";
+import Profiles from './components/profiles/Profiles';
+
 import ExperienceContextProvider from "./contexts/ExperienceContext";
 import EducationContextProvider from "./contexts/EducationContext";
 
@@ -46,6 +48,7 @@ const App = () => {
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/profiles" component={Profiles} />
 
 
                   <Route exact path="/dashboard" component={Dashboard} />
