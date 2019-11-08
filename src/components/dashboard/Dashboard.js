@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
+import { ProfileContext } from '../../contexts/ProfileContext';
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 import { EducationContext } from '../../contexts/EducationContext';
 import Spinner from '../common/Spinner';
@@ -15,6 +16,7 @@ import ProfileActions from "./ProfileActions";
 
 const Dashboard = () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
+	const { profile } = useContext(ProfileContext);
 	const { setExperience } = useContext(ExperienceContext);
 	const { setEducation } = useContext(EducationContext);
 
@@ -80,11 +82,12 @@ const Dashboard = () => {
 	let dashboardContent;
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 	else {
-		if (userProfile && userProfile.profile && Object.keys(userProfile.profile).length > 0) {
+		if (profile && Object.keys(profile).length > 0) {
+			// if (userProfile && userProfile.profile && Object.keys(userProfile.profile).length > 0) {
 			dashboardContent = (
 				<div>
-					<ProfileActions />
 					<p className="lead text-name">Welcome {currentUser.name}</p>
+					<ProfileActions />
 					<Experience />
 					<Education />
 					{/* <Experience experience={profile.experience} />

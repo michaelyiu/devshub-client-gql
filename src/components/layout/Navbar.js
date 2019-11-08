@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext';
+import { ProfileContext } from "../../contexts/ProfileContext";
 import { ExperienceContext } from "../../contexts/ExperienceContext";
 import { EducationContext } from "../../contexts/EducationContext";
 
@@ -8,6 +9,7 @@ import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const { isAuthenticated, currentUser, toggleAuth, clearCurrentUser } = useContext(AuthContext);
+  const { clearProfile } = useContext(ProfileContext)
   const { clearExperience } = useContext(ExperienceContext)
   const { clearEducation } = useContext(EducationContext)
   let history = useHistory();
@@ -17,6 +19,7 @@ const Navbar = () => {
     localStorage.clear();
     toggleAuth();
     clearCurrentUser();
+    clearProfile();
     clearExperience();
     clearEducation();
     history.push("/login");

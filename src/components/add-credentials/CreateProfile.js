@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { ProfileContext } from '../../contexts/ProfileContext';
 
 const CreateProfile = () => {
-	const { updateProfileState } = useContext(ProfileContext);
+	const { profile, setProfile } = useContext(ProfileContext);
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		updateProfile();
 		console.log(values);
@@ -39,7 +39,12 @@ const CreateProfile = () => {
 	const [updateProfile, { loading, data, error }] = useMutation(
 		UPDATE_PROFILE,
 		{
-			variables: values
+			variables: values,
+			onCompleted(data) {
+				if (data && data.updateProfile) {
+					setProfile(data.updateProfile);
+				}
+			}
 		}
 	)
 
@@ -53,34 +58,6 @@ const CreateProfile = () => {
 	if (data) {
 		console.log(data);
 	}
-	// const createProfile;
-
-	// onSubmit = (e) => {
-	// 	e.preventDefault();
-
-	// 	const profileData = {
-	// 		handle: values.handle,
-	// 		company: values.company,
-	// 		website: values.website,
-	// 		location: values.location,
-	// 		status: values.status,
-	// 		skills: values.skills,
-	// 		githubUsername: values.githubUsername,
-	// 		bio: values.bio,
-	// 		twitter: values.twitter,
-	// 		facebook: values.facebook,
-	// 		linkedin: values.linkedin,
-	// 		youtube: values.youtube,
-	// 		instagram: values.instagram
-	// 	}
-	// 	this.props.createProfile(profileData, this.props.history);
-	// }
-
-	// onChange = (e) => {
-	// 	this.setState({ [e.target.name]: e.target.value })
-	// }
-
-	// const { errors, displaySocialInputs } = this.state;
 
 	let socialInputs;
 
