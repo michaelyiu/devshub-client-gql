@@ -57,7 +57,6 @@ const Dashboard = () => {
 				email: loggedInEmail
 			},
 			onCompleted() {
-				console.log(userProfile)
 				if (userProfile && userProfile.profile) {
 					setExperience(userProfile.profile.experience)
 					setEducation(userProfile.profile.education)

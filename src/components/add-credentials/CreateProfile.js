@@ -41,9 +41,7 @@ const CreateProfile = () => {
 		{
 			variables: values,
 			onCompleted(data) {
-				console.log(data);
 				if (data && data.updateProfile) {
-					console.log(data);
 					setProfile(data.updateProfile);
 				}
 			}
