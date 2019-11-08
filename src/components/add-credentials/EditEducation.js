@@ -55,12 +55,7 @@ const AddEducation = () => {
 		return <Redirect to='/dashboard' />
 
 	}
-	// onCheck = (e) => {
-	// 	this.setState({
-	// 		disabled: !this.state.disabled,
-	// 		current: !this.state.current
-	// 	})
-	// }
+
 	return (
 		<div className="add-education">
 			<div className="container">
@@ -110,20 +105,20 @@ const AddEducation = () => {
 								error={errors ? errors.to : null}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
-							{/* <div className="form-check mb-4">
+							<div className="form-check mb-4">
 								<input
 									type="checkbox"
 									className="form-check-input"
 									name="current"
 									value={values.current}
 									checked={values.current}
-									onChange={handleCheck}
+									onChange={handleChange}
 									id="current"
 								/>
 								<label htmlFor="current" className="form-check-label">
 									Current Job
                   </label>
-							</div> */}
+							</div>
 							<TextAreaFieldGroup
 								placeholder="Program Description"
 								name="description"

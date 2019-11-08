@@ -5,9 +5,10 @@ const useForm = (callback, data) => {
 
 	const handleChange = (event) => {
 		event.persist()
+		//handle unique case of checkbox manually
 		setValues(values => ({
 			...values,
-			[event.target.name]: event.target.value
+			[event.target.name]: event.target.type === 'checkbox' ? event.target.checked : event.target.value
 		}))
 	}
 
@@ -15,6 +16,15 @@ const useForm = (callback, data) => {
 		event.preventDefault()
 		callback(values)
 	}
+
+	// const onCheck = (event) => {
+	// 	console.log(values)
+	// 	console.log(event.target);
+	// 	setValues(values => ({
+	// 		...values,
+	// 		[event.target.name]: event.target.value
+	// 	}))
+	// }
 
 	return {
 		handleChange,

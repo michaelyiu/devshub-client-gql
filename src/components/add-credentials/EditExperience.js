@@ -33,7 +33,7 @@ const AddExperience = () => {
 		current: expToEdit.current ? expToEdit.current : false,
 		description: expToEdit.description ? expToEdit.description : '',
 		// errors: {},
-		// disabled: false
+		disabled: false
 	})
 
 
@@ -55,12 +55,7 @@ const AddExperience = () => {
 		return <Redirect to='/dashboard' />
 
 	}
-	// onCheck = (e) => {
-	// 	this.setState({
-	// 		disabled: !this.state.disabled,
-	// 		current: !this.state.current
-	// 	})
-	// }
+
 	return (
 		<div className="add-experience">
 			<div className="container">
@@ -110,20 +105,20 @@ const AddExperience = () => {
 								error={errors ? errors.to : null}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
-							{/* <div className="form-check mb-4">
+							<div className="form-check mb-4">
 								<input
 									type="checkbox"
 									className="form-check-input"
 									name="current"
 									value={values.current}
 									checked={values.current}
-									onChange={this.onCheck}
+									onChange={handleChange}
 									id="current"
 								/>
 								<label htmlFor="current" className="form-check-label">
 									Current Job
                   </label>
-							</div> */}
+							</div>
 							<TextAreaFieldGroup
 								placeholder="Job Description"
 								name="description"

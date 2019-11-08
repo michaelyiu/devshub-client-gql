@@ -29,7 +29,7 @@ const AddEducation = () => {
 		current: false,
 		description: '',
 		// errors: {},
-		// disabled: false
+		disabled: false
 	})
 
 	const [createEducation, { loading, data, error }] = useMutation(
@@ -49,16 +49,6 @@ const AddEducation = () => {
 		values.id = data.createEducation.id
 		return <Redirect to='/dashboard' />
 	}
-
-
-
-	// onCheck = (e) => {
-	// 	this.setState({
-	// 		disabled: !values.disabled,
-	// 		current: !values.current
-	// 	})
-	// }
-
 
 	return (
 		<div className="add-education">
@@ -110,20 +100,20 @@ const AddEducation = () => {
 								error={errors ? errors.to : null}
 								disabled={values.disabled ? 'disabled' : ''}
 							/>
-							{/* <div className="form-check mb-4">
+							<div className="form-check mb-4">
 								<input
 									type="checkbox"
 									className="form-check-input"
 									name="current"
 									value={values.current}
 									checked={values.current}
-									onChange={handleCheck}
+									onChange={handleChange}
 									id="current"
 								/>
 								<label htmlFor="current" className="form-check-label">
 									Current Job
                   </label>
-							</div> */}
+							</div>
 							<TextAreaFieldGroup
 								placeholder="Program Description"
 								name="description"
