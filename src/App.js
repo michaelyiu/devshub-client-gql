@@ -50,7 +50,7 @@ const App = () => {
 
                   <Route exact path="/dashboard" component={Dashboard} />
                   <Route exact path="/create-profile" component={CreateProfile} />
-                  {/* <Route exact path="/edit-profile" component={EditProfile} /> */}
+                  <Route exact path="/edit-profile" component={CreateProfile} />
                   <Route exact path="/add-experience" component={AddExperience} />
                   <Route exact path="/add-education" component={AddEducation} />
                   <Route exact path="/edit-experience/:exp_id" component={EditExperience} />

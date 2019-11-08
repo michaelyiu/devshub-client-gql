@@ -16,7 +16,7 @@ import ProfileActions from "./ProfileActions";
 
 const Dashboard = () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
-	const { profile } = useContext(ProfileContext);
+	const { profile, setProfile } = useContext(ProfileContext);
 	const { setExperience } = useContext(ExperienceContext);
 	const { setEducation } = useContext(EducationContext);
 
@@ -57,9 +57,11 @@ const Dashboard = () => {
 				email: loggedInEmail
 			},
 			onCompleted() {
+				console.log(userProfile)
 				if (userProfile && userProfile.profile) {
 					setExperience(userProfile.profile.experience)
 					setEducation(userProfile.profile.education)
+					setProfile(userProfile.profile)
 				}
 			},
 			fetchPolicy: 'network-only'
@@ -86,7 +88,7 @@ const Dashboard = () => {
 			// if (userProfile && userProfile.profile && Object.keys(userProfile.profile).length > 0) {
 			dashboardContent = (
 				<div>
-					<p className="lead text-name">Welcome {currentUser.name}</p>
+					<p className="lead text-name">Welcome {currentUser.name} ({profile.handle})</p>
 					<ProfileActions />
 					<Experience />
 					<Education />

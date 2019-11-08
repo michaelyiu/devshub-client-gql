@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from '../../hooks'
+import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 
@@ -17,7 +18,6 @@ const CreateProfile = () => {
 	const { profile, setProfile } = useContext(ProfileContext);
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		updateProfile();
-		console.log(values);
 	}, {
 		displaySocialInputs: false,
 		handle: '',
@@ -41,7 +41,9 @@ const CreateProfile = () => {
 		{
 			variables: values,
 			onCompleted(data) {
+				console.log(data);
 				if (data && data.updateProfile) {
+					console.log(data);
 					setProfile(data.updateProfile);
 				}
 			}
@@ -56,7 +58,7 @@ const CreateProfile = () => {
 	if (loading) return <Spinner />
 
 	if (data) {
-		console.log(data);
+		return <Redirect to='/dashboard' />
 	}
 
 	let socialInputs;

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 
-import { Link } from 'react-router-dom';
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 
