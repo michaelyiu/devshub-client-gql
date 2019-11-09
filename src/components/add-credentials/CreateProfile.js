@@ -14,25 +14,30 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { ProfileContext } from '../../contexts/ProfileContext';
 
+
+const _ = require('lodash');
+
 const CreateProfile = () => {
 	const { profile, setProfile } = useContext(ProfileContext);
+
+	console.log(profile);
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		updateProfile();
 	}, {
-		displaySocialInputs: false,
-		handle: '',
-		company: '',
-		website: '',
-		location: '',
-		status: '',
-		skills: '',
-		githubUsername: '',
-		bio: '',
-		twitter: '',
-		facebook: '',
-		linkedin: '',
-		youtube: '',
-		instagram: '',
+		// displaySocialInputs: false,
+		handle: !_.isEmpty(profile.handle) ? profile.handle : '',
+		company: !_.isEmpty(profile.company) ? profile.company : '',
+		website: !_.isEmpty(profile.website) ? profile.website : '',
+		location: !_.isEmpty(profile) ? profile.location : '',
+		status: !_.isEmpty(profile) ? profile.status : '',
+		skills: !_.isEmpty(profile.skills) ? profile.skills.join(',') : '',
+		githubUsername: !_.isEmpty(profile) ? profile.githubUsername : '',
+		bio: !_.isEmpty(profile) ? profile.bio : '',
+		twitter: profile ? profile.twitter : '',
+		facebook: profile ? profile.facebook : '',
+		linkedin: profile ? profile.linkin : '',
+		youtube: profile ? profile.youtube : '',
+		instagram: profile ? profile.instagram : '',
 		// errors: {}
 	})
 
@@ -69,7 +74,7 @@ const CreateProfile = () => {
 					name="twitter"
 					icon="fab fa-twitter"
 					value={values.twitter}
-					onChange={this.onChange}
+					onChange={handleChange}
 				// error={errors.twitter}
 				/>
 				<InputGroup
@@ -77,7 +82,7 @@ const CreateProfile = () => {
 					name="facebook"
 					icon="fab fa-facebook"
 					value={values.facebook}
-					onChange={this.onChange}
+					onChange={handleChange}
 				// error={errors.facebook}
 				/>
 				<InputGroup
@@ -85,7 +90,7 @@ const CreateProfile = () => {
 					name="linkedin"
 					icon="fab fa-linkedin"
 					value={values.linkedin}
-					onChange={this.onChange}
+					onChange={handleChange}
 				// error={errors.linkedin}
 				/>
 				<InputGroup
@@ -93,7 +98,7 @@ const CreateProfile = () => {
 					name="youtube"
 					icon="fab fa-youtube"
 					value={values.youtube}
-					onChange={this.onChange}
+					onChange={handleChange}
 				// error={errors.youtube}
 				/>
 				<InputGroup
@@ -101,7 +106,7 @@ const CreateProfile = () => {
 					name="instagram"
 					icon="fab fa-instagram"
 					value={values.instagram}
-					onChange={this.onChange}
+					onChange={handleChange}
 				// error={errors.instagram}
 				/>
 			</div>
@@ -137,7 +142,7 @@ const CreateProfile = () => {
 						<Link to="/dashboard" className="btn btn-light">
 							Go Back
               </Link>
-						<h1 className="display-4 text-center">Create Your Profile</h1>
+						<h1 className="display-4 text-center">{!_.isEmpty(profile) ? 'Edit Your Profile' : 'Create Your Profile'}</h1>
 						<p className="lead text-center">
 							Let's get some information to make your profile stand out!
               </p>

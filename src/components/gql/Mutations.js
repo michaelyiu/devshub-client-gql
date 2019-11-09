@@ -24,7 +24,7 @@ const SIGNUP_MUTATION = gql`
 `
 
 const UPDATE_PROFILE = gql`
-	mutation updateProfile($handle: String!, $company: String, $website: String, $location: String, $status: String, $skills: String!, $bio: String, $githubUsername: String){
+	mutation updateProfile($handle: String!, $company: String, $website: String, $location: String, $status: String!, $skills: String!, $bio: String, $githubUsername: String){
 		updateProfile(handle: $handle, company: $company, website: $website, location: $location, status: $status, skills: $skills, bio: $bio, githubUsername: $githubUsername){
 			handle
 			company

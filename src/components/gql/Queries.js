@@ -61,6 +61,12 @@ const GET_PROFILE = gql`
 		profile(email: $email) {
 			handle
     	bio
+			status
+			company
+			website
+			location
+			skills
+			githubUsername
 			experience {
 				id
 				title
