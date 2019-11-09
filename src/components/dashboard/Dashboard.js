@@ -12,6 +12,8 @@ import { useHistory, Link } from "react-router-dom";
 
 import Experience from "./Experience";
 import Education from "./Education";
+import DeleteProfileButton from "./DeleteProfileButton";
+
 import ProfileActions from "./ProfileActions";
 
 const Dashboard = () => {
@@ -67,10 +69,7 @@ const Dashboard = () => {
 		}
 	);
 
-	// if (userProfile && userProfile.profile) {
-	// 	setEducation(userProfile.profile.education)
-	// 	setExperience(userProfile.profile.experience)
-	// }
+
 
 	useEffect(() => {
 		if (!isAuthenticated) {
@@ -91,6 +90,9 @@ const Dashboard = () => {
 					<ProfileActions />
 					<Experience />
 					<Education />
+					<div className="mt-5 mb-5">
+						<DeleteProfileButton />
+					</div>
 					{/* <Experience experience={profile.experience} />
 			<Education education={profile.education} />
 			<div className="mt-5 mb-5">

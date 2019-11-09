@@ -38,6 +38,12 @@ const UPDATE_PROFILE = gql`
 	}
 `
 
+const DELETE_PROFILE = gql`
+mutation deleteProfile{
+	deleteProfile
+}
+`
+
 
 const CREATE_EXPERIENCE = gql`
 	mutation createExperience($title: String!, $company: String!, $location: String!, $from: String!, $to: String, $current: Boolean, $description: String ){
@@ -121,5 +127,6 @@ export {
 	CREATE_EDUCATION,
 	EDIT_EDUCATION,
 	DELETE_EXPERIENCE,
-	DELETE_EDUCATION
+	DELETE_EDUCATION,
+	DELETE_PROFILE
 };
