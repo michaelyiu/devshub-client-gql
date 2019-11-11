@@ -77,7 +77,7 @@ const CreateProfile = () => {
 					icon="fab fa-twitter"
 					value={values.twitter}
 					onChange={handleChange}
-				// error={errors.twitter}
+					error={errors && errors.twitter ? errors.twitter : null}
 				/>
 				<InputGroup
 					placeholder="Facebook Profile URL"
@@ -85,7 +85,7 @@ const CreateProfile = () => {
 					icon="fab fa-facebook"
 					value={values.facebook}
 					onChange={handleChange}
-				// error={errors.facebook}
+					error={errors && errors.facebook ? errors.facebook : null}
 				/>
 				<InputGroup
 					placeholder="LinkedIn Profile URL"
@@ -93,7 +93,7 @@ const CreateProfile = () => {
 					icon="fab fa-linkedin"
 					value={values.linkedin}
 					onChange={handleChange}
-				// error={errors.linkedin}
+					error={errors && errors.linkedin ? errors.linkedin : null}
 				/>
 				<InputGroup
 					placeholder="YouTube Channel URL"
@@ -101,7 +101,7 @@ const CreateProfile = () => {
 					icon="fab fa-youtube"
 					value={values.youtube}
 					onChange={handleChange}
-				// error={errors.youtube}
+					error={errors && errors.youtube ? errors.youtube : null}
 				/>
 				<InputGroup
 					placeholder="Instagram Page URL"
@@ -109,7 +109,7 @@ const CreateProfile = () => {
 					icon="fab fa-instagram"
 					value={values.instagram}
 					onChange={handleChange}
-				// error={errors.instagram}
+					error={errors && errors.instagram ? errors.instagram : null}
 				/>
 			</div>
 		)

@@ -18,7 +18,7 @@ const Profiles = () => {
 	if (loading) {
 		profileItems = <Spinner />
 	} else {
-		if (data.profiles && data.profiles.length > 0) {
+		if (data && data.profiles && data.profiles.length > 0) {
 			profileItems = data.profiles.map((profile, index) => (
 				// <ProfileItem key={profile.id} profile={profile} />
 				<ProfileItem key={index} profile={profile} />

@@ -1,14 +1,14 @@
 import React from 'react';
 import Moment from 'react-moment';
+const moment = require('moment');
 
 const ProfileCreds = (props) => {
 	const { experience, education } = props;
-
 	const expItems = experience.map(exp => (
 		<li key={exp.id} className="list-group-item">
 			<h4>{exp.company}</h4>
 			<p>
-				{/* <Moment format="YYYY/MM/DD">{exp.from}</Moment> - {exp.to === null ? ('Now') : (<Moment format="YYYY/MM/DD">{exp.to}</Moment>)} */}
+				<Moment format="YYYY/MM/DD">{moment.unix(exp.from / 1000)}</Moment> - {exp.to === null ? ('Now') : (<Moment format="YYYY/MM/DD">{moment.unix(exp.to / 1000)}</Moment>)}
 			</p>
 			<p><strong>Position:</strong> {exp.title}</p>
 			<p>
@@ -25,7 +25,7 @@ const ProfileCreds = (props) => {
 		<li key={edu.id} className="list-group-item">
 			<h4>{edu.school}</h4>
 			<p>
-				{/* <Moment format="YYYY/MM/DD">{edu.from}</Moment> - {edu.to === null ? ('Now') : (<Moment format="YYYY/MM/DD">{edu.to}</Moment>)} */}
+				<Moment format="YYYY/MM/DD">{moment.unix(edu.from / 1000)}</Moment> - {edu.to === null ? ('Now') : (<Moment format="YYYY/MM/DD">{moment.unix(edu.to / 1000)}</Moment>)}
 			</p>
 			<p><strong>Degree:</strong> {edu.degree}</p>
 			<p><strong>Field Of Study:</strong> {edu.fieldOfStudy}</p>
