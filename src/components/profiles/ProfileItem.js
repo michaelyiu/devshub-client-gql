@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const _ = require('lodash');
 
@@ -23,9 +24,9 @@ const ProfileItem = (props) => {
 					<p>
 						{_.isEmpty(profile.location) ? null : (<span>{profile.location}</span>)}
 					</p>
-					{/* <Link to={`/user/${user.handle}`} className="btn btn-info">
+					<Link to={`/profile/${profile.handle}`} className="btn btn-info">
 						View Profile
-            </Link> */}
+            </Link>
 				</div>
 				<div className="col-md-4 d-none d-md-block">
 					<h4>Skill Set</h4>

@@ -38,10 +38,11 @@ const UPDATE_PROFILE = gql`
 	}
 `
 
+
 const DELETE_PROFILE = gql`
-mutation deleteProfile{
-	deleteProfile
-}
+	mutation deleteProfile{
+		deleteProfile
+	}
 `
 
 

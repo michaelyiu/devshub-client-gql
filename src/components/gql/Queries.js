@@ -91,12 +91,52 @@ const GET_PROFILE = gql`
 	}
 `
 
+const GET_PROFILE_BY_HANDLE = gql`
+	query ($handle: String!) {
+		profileByHandle(handle: $handle) {
+			handle
+    	bio
+			status
+			company
+			website
+			location
+			skills
+			githubUsername
+			experience {
+				id
+				title
+				company
+				location
+				from
+				to
+				current
+				description
+			}
+			education {
+				id
+				school
+				degree
+				fieldOfStudy
+				from
+				to
+				current
+				description
+			}
+			user{
+				name
+				avatar
+			}
+		}
+	}
+`;
+
 
 export {
 	ISLOGGEDIN_QUERY,
 	GET_CURRENT_USER,
 	GET_PROFILE,
-	GET_ALL_PROFILES
+	GET_PROFILE_BY_HANDLE,
+	GET_ALL_PROFILES,
 };
 
 

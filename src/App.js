@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ApolloProvider } from "@apollo/react-hooks";
+import client from "./apollo";
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -8,28 +10,22 @@ import GQLTest from "./components/layout/GQLTest";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-
 import Dashboard from "./components/dashboard/Dashboard";
-
-import { ApolloProvider } from "@apollo/react-hooks";
-import "./App.css";
-
 
 import AuthContextProvider from './contexts/AuthContext';
 import ProfileContextProvider from "./contexts/ProfileContext";
-
-import client from "./apollo";
+import ExperienceContextProvider from "./contexts/ExperienceContext";
+import EducationContextProvider from "./contexts/EducationContext";
 
 import CreateProfile from "./components/add-credentials/CreateProfile";
-import EditProfile from "./components/add-credentials/EditProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
 import EditExperience from "./components/add-credentials/EditExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 import EditEducation from "./components/add-credentials/EditEducation";
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 
-import ExperienceContextProvider from "./contexts/ExperienceContext";
-import EducationContextProvider from "./contexts/EducationContext";
+import "./App.css";
 
 
 const App = () => {
@@ -49,6 +45,7 @@ const App = () => {
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/profiles" component={Profiles} />
+                  <Route exact path="/profile/:handle" component={Profile} />
 
 
                   <Route exact path="/dashboard" component={Dashboard} />
