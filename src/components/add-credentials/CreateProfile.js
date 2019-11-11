@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from '../../hooks'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -18,9 +18,9 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 const _ = require('lodash');
 
 const CreateProfile = () => {
+	const [displaySocialInputs, setDisplaySocialInputs] = useState(false);
 	const { profile, setProfile } = useContext(ProfileContext);
 
-	console.log(profile);
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		updateProfile();
 	}, {
@@ -28,16 +28,16 @@ const CreateProfile = () => {
 		handle: !_.isEmpty(profile.handle) ? profile.handle : '',
 		company: !_.isEmpty(profile.company) ? profile.company : '',
 		website: !_.isEmpty(profile.website) ? profile.website : '',
-		location: !_.isEmpty(profile) ? profile.location : '',
-		status: !_.isEmpty(profile) ? profile.status : '',
+		location: !_.isEmpty(profile.location) ? profile.location : '',
+		status: !_.isEmpty(profile.status) ? profile.status : '',
 		skills: !_.isEmpty(profile.skills) ? profile.skills.join(',') : '',
 		githubUsername: !_.isEmpty(profile) ? profile.githubUsername : '',
-		bio: !_.isEmpty(profile) ? profile.bio : '',
-		twitter: profile ? profile.twitter : '',
-		facebook: profile ? profile.facebook : '',
-		linkedin: profile ? profile.linkin : '',
-		youtube: profile ? profile.youtube : '',
-		instagram: profile ? profile.instagram : '',
+		bio: !_.isEmpty(profile.bio) ? profile.bio : '',
+		twitter: !_.isEmpty(profile.social.twitter) ? profile.social.twitter : '',
+		facebook: !_.isEmpty(profile.social.facebook) ? profile.social.facebook : '',
+		linkedin: !_.isEmpty(profile.social.linkedin) ? profile.social.linkedin : '',
+		youtube: !_.isEmpty(profile.social.youtube) ? profile.social.youtube : '',
+		instagram: !_.isEmpty(profile.social.instagram) ? profile.social.instagram : '',
 		// errors: {}
 	})
 
@@ -46,13 +46,15 @@ const CreateProfile = () => {
 		{
 			variables: values,
 			onCompleted(data) {
+				console.log(data)
 				if (data && data.updateProfile) {
 					setProfile(data.updateProfile);
+					setProfile(data.updateSocials);
 				}
 			}
 		}
 	)
-
+	console.log(profile)
 	let errors;
 	if (!loading && error) {
 		errors = error.graphQLErrors[0].extensions.exception.errors;
@@ -66,7 +68,7 @@ const CreateProfile = () => {
 
 	let socialInputs;
 
-	if (values.displaySocialInputs) {
+	if (displaySocialInputs) {
 		socialInputs = (
 			<div>
 				<InputGroup
@@ -216,12 +218,9 @@ const CreateProfile = () => {
 							<div className="mp-3">
 								<button
 									type="button"
-									onClick={() => {
-										console.log("Hello!")
-										// this.setState(prevState => ({
-										// 	displaySocialInputs: !prevState.displaySocialInputs
-										// }));
-									}}
+									onClick={() =>
+										setDisplaySocialInputs(!displaySocialInputs)
+									}
 									className="btn btn-light">
 									Add Social Network Links
                   </button>
@@ -235,7 +234,7 @@ const CreateProfile = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }
 export default CreateProfile;

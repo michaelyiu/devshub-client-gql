@@ -87,6 +87,13 @@ const GET_PROFILE = gql`
 				current
 				description
 			}
+			social{
+				twitter
+				youtube
+				facebook
+				linkedin
+				instagram
+			}
 		}
 	}
 `
@@ -125,6 +132,13 @@ const GET_PROFILE_BY_HANDLE = gql`
 			user{
 				name
 				avatar
+			}
+			social{
+				youtube
+				twitter
+				facebook
+				linkedin
+				instagram
 			}
 		}
 	}

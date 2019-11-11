@@ -12,7 +12,7 @@ const ProfileGithub = (props) => {
 	useEffect(() => {
 
 		async function fetchRepos() {
-			const result = await fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`).catch(err => {
+			const result = await fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}$client_id=${clientId}&client_secret=${clientSecret}`).catch(err => {
 				console.log(err);
 				return null
 			})

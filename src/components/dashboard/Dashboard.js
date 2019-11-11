@@ -83,21 +83,15 @@ const Dashboard = () => {
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 	else {
 		if (profile && Object.keys(profile).length > 0) {
-			// if (userProfile && userProfile.profile && Object.keys(userProfile.profile).length > 0) {
 			dashboardContent = (
 				<div>
-					<p className="lead text-name">Welcome {currentUser.name} ({profile.handle})</p>
+					<p className="lead text-name">Welcome <Link to={`/profile/${profile.handle}`}> {currentUser.name}</Link></p>
 					<ProfileActions />
 					<Experience />
 					<Education />
 					<div className="mt-5 mb-5">
 						<DeleteProfileButton />
 					</div>
-					{/* <Experience experience={profile.experience} />
-			<Education education={profile.education} />
-			<div className="mt-5 mb-5">
-				<button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account</button>
-			</div> */}
 				</div>
 			)
 		} else {

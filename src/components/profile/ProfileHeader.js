@@ -4,7 +4,6 @@ const _ = require('lodash');
 
 const ProfileGithub = (props) => {
 	const { profile } = props;
-	console.log(profile)
 	return (
 		profile ?
 			<div className="row">

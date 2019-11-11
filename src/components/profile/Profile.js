@@ -27,7 +27,6 @@ const Profile = () => {
 	let profile;
 	if (!loading && data)
 		profile = data.profileByHandle;
-	console.log(profile)
 
 	let profileContent;
 

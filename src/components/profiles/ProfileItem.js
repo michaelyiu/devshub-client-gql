@@ -6,8 +6,6 @@ const _ = require('lodash');
 const ProfileItem = (props) => {
 	const { profile } = props;
 
-
-
 	return (
 		<div className="card card-body bg-light mb-3">
 			<div className="row">
