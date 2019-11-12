@@ -4,6 +4,7 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 import { EducationContext } from '../../contexts/EducationContext';
 import Spinner from '../common/Spinner';
+import jwt_decode from 'jwt-decode';
 
 import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
 
@@ -72,13 +73,16 @@ const Dashboard = () => {
 
 
 	useEffect(() => {
+		const token = jwt_decode(window.localStorage.getItem('token'));
+		window.localStorage.setItem('auth', JSON.stringify(token))
 		if (!isAuthenticated) {
 			history.push("/login");
 		} else {
 			//if the user is authenticated
 
 		}
-	})
+		//empty array may need to be removed
+	}, [])
 	let dashboardContent;
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 	else {

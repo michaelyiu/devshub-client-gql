@@ -145,12 +145,34 @@ const GET_PROFILE_BY_HANDLE = gql`
 `;
 
 
+const GET_POSTS = gql`
+	query {
+		posts{
+			id
+			text
+			name
+			handle
+			avatar
+			likes{
+				id
+				user
+			}
+			comments{
+				text
+				name
+				handle
+			}
+		}
+	}
+`;
+
 export {
 	ISLOGGEDIN_QUERY,
 	GET_CURRENT_USER,
 	GET_PROFILE,
 	GET_PROFILE_BY_HANDLE,
 	GET_ALL_PROFILES,
+	GET_POSTS
 };
 
 
