@@ -128,13 +128,19 @@ const DELETE_EDUCATION = gql`
 
 const ADD_LIKE = gql`
 	mutation addLike($post_id: String!){
-		addLike(post_id: $post_id)
+		addLike(post_id: $post_id){
+			id
+			user
+		}
 	}
 `;
 
 const REMOVE_LIKE = gql`
 	mutation removeLike($post_id: String!){
-		removeLike(post_id: $post_id)
+		removeLike(post_id: $post_id){
+			id
+			user
+		}
 	}
 `;
 

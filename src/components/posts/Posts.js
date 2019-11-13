@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PostForm from './PostForm';
 import PostFeed from './PostFeed';
 import Spinner from './../common/Spinner';
 
-import { ProfileContext } from '../../contexts/ProfileContext';
+import { PostContext } from '../../contexts/PostContext';
 
 import { GET_POSTS } from "../gql/Queries";
 import { useQuery } from '@apollo/react-hooks';
 
 const Posts = () => {
-	const { profile } = useContext(ProfileContext);
+	// const [posts, setPosts] = useState([]);
+	const { setPosts } = useContext(PostContext)
 
 
 	const {
@@ -17,21 +18,22 @@ const Posts = () => {
 		loading,
 		error
 	} = useQuery(
-		GET_POSTS
+		GET_POSTS,
+		{
+			onCompleted() {
+				setPosts(data.posts);
+
+			}
+		}
 	);
 
-
-	// componentDidMount() {
-	// 	this.props.getPosts();
-	// 	this.props.getCurrentProfile();
-	// }
-	// const { posts, loading } = this.props.post;
 	let postContent;
 
 	// if posts is loading , then show loading spinner
 	if (loading) {
 		postContent = <Spinner />
 	} else {
+		console.log(data.posts);
 		postContent = <PostFeed posts={data.posts} />
 	}
 

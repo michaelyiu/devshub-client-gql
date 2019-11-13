@@ -82,7 +82,7 @@ const Dashboard = () => {
 
 		}
 		//empty array may need to be removed
-	}, [])
+	})
 	let dashboardContent;
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 	else {

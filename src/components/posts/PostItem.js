@@ -1,19 +1,29 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import { PostContext } from '../../contexts/PostContext';
 
 import { ADD_LIKE, REMOVE_LIKE } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
 const PostItem = (props) => {
+	const { posts, createLike, deleteLike } = useContext(PostContext);
 	const { post } = props;
 	const { id: authUserId } = JSON.parse(localStorage.getItem('auth'));
 
 
-	const [addLike] = useMutation(ADD_LIKE);
-	const [removeLike] = useMutation(REMOVE_LIKE);
-
-
+	const [addLike] = useMutation(ADD_LIKE, {
+		onCompleted({ addLike }) {
+			//setSingularPost in posts that I may add to localStorage
+			createLike(post, addLike)
+		}
+	}
+	);
+	const [removeLike] = useMutation(REMOVE_LIKE, {
+		onCompleted({ removeLike }) {
+			deleteLike(post, removeLike)
+		}
+	});
 
 
 
@@ -27,14 +37,16 @@ const PostItem = (props) => {
 	// 	removeLike({ variables: id });
 	// }
 	const onToggleLikeClick = (post_id) => {
+		let findPost = post.likes.find(like => like.user === authUserId);
 		if (post.likes.find(like => like.user === authUserId)) {
 			removeLike({ variables: { post_id } });
-			// 			this.props.removeLike(id);
 		} else {
 			addLike({ variables: { post_id } });
-			// 			this.props.addLike(id);
 		}
 	}
+	useEffect(() => {
+	}, [])
+
 
 	const findUserLike = (likes) => {
 		if (likes.filter(like => like.user === authUserId).length > 0) {

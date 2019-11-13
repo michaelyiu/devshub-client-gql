@@ -19,11 +19,6 @@ const Profile = () => {
 	})
 
 
-	// componentWillReceiveProps(nextProps) {
-	// 	if (nextProps.profile.profile === null && this.props.profile.loading) {
-	// 		this.props.history.push('/not-found');
-	// 	}
-	// }
 	let profile;
 	if (!loading && data)
 		profile = data.profileByHandle;

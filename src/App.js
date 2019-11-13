@@ -16,6 +16,7 @@ import AuthContextProvider from './contexts/AuthContext';
 import ProfileContextProvider from "./contexts/ProfileContext";
 import ExperienceContextProvider from "./contexts/ExperienceContext";
 import EducationContextProvider from "./contexts/EducationContext";
+import PostContextProvider from "./contexts/PostContext";
 
 import CreateProfile from "./components/add-credentials/CreateProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
@@ -39,27 +40,29 @@ const App = () => {
             <ExperienceContextProvider>
               <EducationContextProvider>
 
+                <PostContextProvider>
 
-                <Router>
-                  <GQLTest />
-                  <Navbar />
-                  <Route exact path="/" component={Landing} />
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/profiles" component={Profiles} />
-                  <Route exact path="/profile/:handle" component={Profile} />
+                  <Router>
+                    <GQLTest />
+                    <Navbar />
+                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/profiles" component={Profiles} />
+                    <Route exact path="/profile/:handle" component={Profile} />
 
 
-                  <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/create-profile" component={CreateProfile} />
-                  <Route exact path="/edit-profile" component={CreateProfile} />
-                  <Route exact path="/add-experience" component={AddExperience} />
-                  <Route exact path="/add-education" component={AddEducation} />
-                  <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
-                  <Route exact path="/edit-education/:edu_id" component={EditEducation} />
-                  <Route exact path="/feed" component={Posts} />
-                  {/* <Route exact path="/post/:id" component={Post} /> */}
-                  {/* <Route exact path="/" component={Landing} />
+                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/create-profile" component={CreateProfile} />
+                    <Route exact path="/edit-profile" component={CreateProfile} />
+                    <Route exact path="/add-experience" component={AddExperience} />
+                    <Route exact path="/add-education" component={AddEducation} />
+                    <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
+                    <Route exact path="/edit-education/:edu_id" component={EditEducation} />
+                    <Route exact path="/feed" component={Posts} />
+
+                    {/* <Route exact path="/post/:id" component={Post} /> */}
+                    {/* <Route exact path="/" component={Landing} />
           <div className="container">
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
@@ -118,8 +121,9 @@ const App = () => {
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
           </div> */}
-                  <Footer />
-                </Router>
+                    <Footer />
+                  </Router>
+                </PostContextProvider>
               </EducationContextProvider>
             </ExperienceContextProvider>
           </ProfileContextProvider>
