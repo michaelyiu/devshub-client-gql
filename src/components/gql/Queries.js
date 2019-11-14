@@ -180,6 +180,8 @@ const GET_POST = gql`
 			handle
 			avatar
 			comments{
+				id
+				user
 				text
 				name
 				date

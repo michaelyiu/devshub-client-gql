@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import CommentItem from './CommentItem';
+import { CommentContext } from '../../contexts/CommentContext';
 
-const CommentFeed = () => {
-	const { comments, postId } = this.props;
+const CommentFeed = (props) => {
+	const { comments } = useContext(CommentContext);
+
 	return comments.map(comment =>
-		<CommentItem key={comment._id} comment={comment} postId={postId} />
+		<CommentItem key={comment.id} comment={comment} postId={props.postId} />
 	)
 }
 

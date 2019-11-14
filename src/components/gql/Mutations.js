@@ -164,13 +164,24 @@ const DELETE_POST = gql`
 `;
 
 const CREATE_COMMENT = gql`
-	mutation createComment($text: String! $name: String! $avatar: String!){
-		createComment(text: $text, name: $name, avatar: $avatar)
+	mutation createComment($post_id: String! $text: String! $name: String! $avatar: String!){
+		createComment(post_id: $post_id, text: $text, name: $name, avatar: $avatar)
 		{
+			id
+			avatar
+			handle
+			name
 			text
+			user
 		}
 	}
 `
+
+const DELETE_COMMENT = gql`
+	mutation deleteComment($post_id: String!, $comment_id: String!){
+		deleteComment(post_id: $post_id, comment_id: $comment_id)
+	}
+`;
 
 export {
 	ISLOGGEDIN_MUTATION,
@@ -188,5 +199,6 @@ export {
 	REMOVE_LIKE,
 	CREATE_POST,
 	DELETE_POST,
-	CREATE_COMMENT
+	CREATE_COMMENT,
+	DELETE_COMMENT
 };

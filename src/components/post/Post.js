@@ -1,21 +1,27 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import PostItem from './../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import Spinner from './../common/Spinner';
-// import { getPost } from './../../actions/postActions';
+
+import { CommentContext } from '../../contexts/CommentContext';
 
 import { GET_POST } from "../gql/Queries";
 
 import { useQuery } from '@apollo/react-hooks';
 
 const Post = () => {
+	const { setComments } = useContext(CommentContext);
+
 	const { id: postId } = useParams();
 
 	const { data, loading, error } = useQuery(GET_POST, {
 		variables: {
 			id: postId
+		},
+		onCompleted() {
+			setComments(data.post.comments);
 		}
 	});
 
@@ -24,17 +30,15 @@ const Post = () => {
 	if (data)
 		post = data.post;
 
-	// const { post, loading } = this.props.post;
 	let postContent;
 
 	if (post === null || loading || Object.keys(post).length === 0) {
 		postContent = <Spinner />
 	} else {
-		console.log(post)
 		postContent = (<div>
 			<PostItem post={post} showActions={false} />
 			<CommentForm postId={post.id} />
-			{/*<CommentFeed postId={post.id} comments={post.comments} /> */}
+			<CommentFeed postId={post.id} comments={post.comments} />
 		</div>);
 	}
 

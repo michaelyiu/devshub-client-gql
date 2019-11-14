@@ -14,7 +14,6 @@ const PostItem = (props) => {
 
 	const [addLike] = useMutation(ADD_LIKE, {
 		onCompleted({ addLike }) {
-			//setSingularPost in posts that I may add to localStorage
 			createLike(post, addLike)
 		}
 	}
@@ -25,9 +24,7 @@ const PostItem = (props) => {
 		}
 	});
 
-	const [deletePost] = useMutation(DELETE_POST)
-
-
+	const [deletePost] = useMutation(DELETE_POST);
 
 	const onDeleteClick = (post_id) => {
 		deletePost({ variables: { id: post_id } });
@@ -49,7 +46,6 @@ const PostItem = (props) => {
 			return false;
 		}
 	}
-
 
 	return (
 		<div className="card card-body mb-3">

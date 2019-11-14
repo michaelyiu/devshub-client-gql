@@ -1,46 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from '../../hooks';
 import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
-// import { addComment } from './../../actions/postActions';
 
-const CommentForm = () => {
+import { CREATE_COMMENT } from "../gql/Mutations";
+import { useMutation } from '@apollo/react-hooks';
+
+import { AuthContext } from '../../contexts/AuthContext';
+import { CommentContext } from '../../contexts/CommentContext';
+
+const CommentForm = (props) => {
+	const { currentUser } = useContext(AuthContext);
+	const { addComment } = useContext(CommentContext);
+
+	const { postId } = props;
+
 	const { values, handleChange, handleSubmit } = useForm(() => {
+		createComment();
 	}, {
 		text: ''
 	})
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		text: '',
-	// 		errors: {}
-	// 	}
-	// }
 
-	// componentWillReceiveProps(newProps) {
-	// 	if (newProps.errors) {
-	// 		this.setState({ errors: newProps.errors })
-	// 	}
-	// }
-
-	// onSubmit = (e) => {
-	// 	e.preventDefault();
-
-	// 	const { user } = this.props.auth;
-	// 	const { postId } = this.props;
-
-
-	// 	const newComment = {
-	// 		text: this.state.text,
-	// 		name: user.name,
-	// 		avatar: user.avatar
-	// 	};
-
-	// 	this.props.addComment(postId, newComment);
-	// 	this.setState({ text: '' })
-	// }
-
-
-
+	const [createComment] = useMutation(CREATE_COMMENT, {
+		variables: {
+			post_id: postId,
+			text: values.text,
+			name: currentUser.name,
+			avatar: currentUser.avatar
+		},
+		onCompleted(data) {
+			if (data)
+				addComment(data.createComment)
+		}
+	})
 
 	return (
 		<div className="post-form mb-3">
