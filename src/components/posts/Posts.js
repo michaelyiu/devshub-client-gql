@@ -11,7 +11,6 @@ import { useQuery } from '@apollo/react-hooks';
 const Posts = () => {
 	const { setPosts } = useContext(PostContext)
 
-
 	const {
 		data,
 		loading,

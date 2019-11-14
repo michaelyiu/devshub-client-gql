@@ -152,6 +152,7 @@ const CREATE_POST = gql`
 			handle
 			name
 			text
+			user
 		}
 	}
 `

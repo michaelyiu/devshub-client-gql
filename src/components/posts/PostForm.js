@@ -33,33 +33,6 @@ const PostForm = () => {
 		}
 	})
 
-	// 	componentWillReceiveProps(newProps) {
-	// 		if (newProps.errors) {
-	// 			this.setState({ errors: newProps.errors })
-	// 		}
-	// 	}
-	// 	onChange = (e) => {
-	// 		this.setState({ [e.target.name]: e.target.value })
-	// 	}
-
-	// 	onSubmit = (e) => {
-	// 		e.preventDefault();
-
-	// 		const { user } = this.props.auth;
-
-	// 		const newPost = {
-	// 			text: this.state.text,
-	// 			name: user.name,
-	// 			avatar: user.avatar,
-	// 		};
-
-	// 		this.props.addPost(newPost);
-	// 		this.setState({ text: '' })
-	// 	}
-
-	// 	render() {
-	// 		const { errors } = this.state;
-
 	return (
 		<div className="post-form mb-3">
 			<div className="card card-info">

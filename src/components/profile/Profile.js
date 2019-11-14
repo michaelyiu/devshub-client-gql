@@ -18,7 +18,6 @@ const Profile = () => {
 		variables: { handle }
 	})
 
-
 	let profile;
 	if (!loading && data)
 		profile = data.profileByHandle;

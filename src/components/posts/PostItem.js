@@ -33,14 +33,7 @@ const PostItem = (props) => {
 		deletePost({ variables: { id: post_id } });
 		removePost(post_id);
 	}
-	console.log(authUserId);
-	console.log(post);
-	// const onLikeClick = (id) => {
-	// 	addLike({ variables: id });
-	// }
-	// const onDislikeClick = (id) => {
-	// 	removeLike({ variables: id });
-	// }
+
 	const onToggleLikeClick = (post_id) => {
 		if (post.likes.find(like => like.user === authUserId)) {
 			removeLike({ variables: { post_id } });
@@ -48,9 +41,6 @@ const PostItem = (props) => {
 			addLike({ variables: { post_id } });
 		}
 	}
-	useEffect(() => {
-	}, [])
-
 
 	const findUserLike = (likes) => {
 		if (likes.filter(like => like.user === authUserId).length > 0) {
@@ -91,26 +81,6 @@ const PostItem = (props) => {
 							</button>
 						) : null}
 					</span>
-
-
-
-					{/*
-					{showActions ? (<span>
-						<button onClick={() => this.onToggleLikeClick(post._id)} type="button" className="btn btn-light mr-1">
-							<i className={classnames('fas fa-thumbs-up', {
-								'text-info': this.findUserLike(post.likes)
-							})}></i>
-							<span className="badge badge-light">{post.likes.length}</span>
-						</button>
-						<Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-							Comments
-	            </Link>
-						{post.user === auth.user.id ? (
-							<button onClick={() => this.onDeleteClick(post._id)} type="button" className="btn btn-danger mr-1">
-								<i className="fas fa-times"></i>
-							</button>
-						) : null}
-					</span>) : null} */}
 				</div>
 			</div>
 		</div >
