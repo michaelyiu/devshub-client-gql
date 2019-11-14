@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PostForm from './PostForm';
 import PostFeed from './PostFeed';
 import Spinner from './../common/Spinner';
@@ -9,7 +9,6 @@ import { GET_POSTS } from "../gql/Queries";
 import { useQuery } from '@apollo/react-hooks';
 
 const Posts = () => {
-	// const [posts, setPosts] = useState([]);
 	const { setPosts } = useContext(PostContext)
 
 

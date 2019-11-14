@@ -144,6 +144,33 @@ const REMOVE_LIKE = gql`
 	}
 `;
 
+const CREATE_POST = gql`
+	mutation createPost($text: String! $name: String! $avatar: String!){
+		createPost(text: $text, name: $name, avatar: $avatar){
+			id
+			avatar
+			handle
+			name
+			text
+		}
+	}
+`
+
+const DELETE_POST = gql`
+	mutation deletePost($id: ID!){
+		deletePost(id: $id)
+	}
+`;
+
+const CREATE_COMMENT = gql`
+	mutation createComment($text: String! $name: String! $avatar: String!){
+		createComment(text: $text, name: $name, avatar: $avatar)
+		{
+			text
+		}
+	}
+`
+
 export {
 	ISLOGGEDIN_MUTATION,
 	SIGNIN_MUTATION,
@@ -157,5 +184,8 @@ export {
 	DELETE_EDUCATION,
 	DELETE_PROFILE,
 	ADD_LIKE,
-	REMOVE_LIKE
+	REMOVE_LIKE,
+	CREATE_POST,
+	DELETE_POST,
+	CREATE_COMMENT
 };

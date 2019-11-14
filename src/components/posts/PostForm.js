@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
 import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
-// import { addPost } from './../../actions/postActions';
+
+import { CREATE_POST } from "../gql/Mutations";
+import { useMutation } from '@apollo/react-hooks';
+
+import { AuthContext } from '../../contexts/AuthContext';
+import { PostContext } from '../../contexts/PostContext';
 
 
 
 const PostForm = () => {
-	const { values, handleChange, handleSubmit } = useForm(() => {
+	const { currentUser } = useContext(AuthContext);
+	const { addPost } = useContext(PostContext);
+
+	const { values, handleChange, handleSubmit } = useForm(async () => {
+		await createPost();
+		//push post to context to rerender
 	}, {
 		text: ''
 	})
-	// 	constructor(props) {
-	// 		super(props);
-	// 		this.state = {
-	// 			text: '',
-	// 			errors: {}
-	// 		}
-	// 	}
+
+	const [createPost] = useMutation(CREATE_POST, {
+		variables: {
+			text: values.text,
+			name: currentUser.name,
+			avatar: currentUser.avatar
+		},
+		onCompleted(data) {
+			if (data)
+				addPost(data.createPost)
+		}
+	})
 
 	// 	componentWillReceiveProps(newProps) {
 	// 		if (newProps.errors) {

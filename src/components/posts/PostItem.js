@@ -3,11 +3,11 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { PostContext } from '../../contexts/PostContext';
 
-import { ADD_LIKE, REMOVE_LIKE } from "../gql/Mutations";
+import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
 const PostItem = (props) => {
-	const { posts, createLike, deleteLike } = useContext(PostContext);
+	const { posts, createLike, deleteLike, removePost } = useContext(PostContext);
 	const { post } = props;
 	const { id: authUserId } = JSON.parse(localStorage.getItem('auth'));
 
@@ -25,11 +25,16 @@ const PostItem = (props) => {
 		}
 	});
 
+	const [deletePost] = useMutation(DELETE_POST)
 
 
-	// 	onDeleteClick = (id) => {
-	// 		this.props.deletePost(id);
-	// 	}
+
+	const onDeleteClick = (post_id) => {
+		deletePost({ variables: { id: post_id } });
+		removePost(post_id);
+	}
+	console.log(authUserId);
+	console.log(post);
 	// const onLikeClick = (id) => {
 	// 	addLike({ variables: id });
 	// }
@@ -37,7 +42,6 @@ const PostItem = (props) => {
 	// 	removeLike({ variables: id });
 	// }
 	const onToggleLikeClick = (post_id) => {
-		let findPost = post.likes.find(like => like.user === authUserId);
 		if (post.likes.find(like => like.user === authUserId)) {
 			removeLike({ variables: { post_id } });
 		} else {
@@ -81,11 +85,11 @@ const PostItem = (props) => {
 						<Link to={`/post/${post.id}`} className="btn btn-info mr-1">
 							Comments
 						</Link>
-						{/* {post.user === auth.user.id ? (
-							<button onClick={() => this.onDeleteClick(post._id)} type="button" className="btn btn-danger mr-1">
+						{post.user === authUserId ? (
+							<button onClick={() => onDeleteClick(post.id)} type="button" className="btn btn-danger mr-1">
 								<i className="fas fa-times"></i>
 							</button>
-						) : null} */}
+						) : null}
 					</span>
 
 

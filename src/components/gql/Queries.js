@@ -149,6 +149,7 @@ const GET_POSTS = gql`
 	query {
 		posts{
 			id
+			user
 			text
 			name
 			handle
