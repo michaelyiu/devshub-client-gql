@@ -166,13 +166,37 @@ const GET_POSTS = gql`
 	}
 `;
 
+const GET_POST = gql`
+	query($id: ID!){
+		post(id: $id){
+			id
+			text
+			name
+			likes{
+				id
+				user
+			}
+			handle
+			avatar
+			comments{
+				text
+				name
+				date
+				handle
+				avatar
+			}
+		}
+	}
+`;
+
 export {
 	ISLOGGEDIN_QUERY,
 	GET_CURRENT_USER,
 	GET_PROFILE,
 	GET_PROFILE_BY_HANDLE,
 	GET_ALL_PROFILES,
-	GET_POSTS
+	GET_POSTS,
+	GET_POST
 };
 
 

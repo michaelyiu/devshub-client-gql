@@ -28,12 +28,11 @@ const PostContextProvider = (props) => {
 
 	}
 
-
 	const clearPost = () => {
 		setPosts([]);
 	}
+
 	useEffect(() => {
-		console.log("does this hit")
 		localStorage.setItem('posts', JSON.stringify(posts))
 	}, [posts])
 

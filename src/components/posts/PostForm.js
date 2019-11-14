@@ -1,9 +1,15 @@
 import React from 'react';
-// import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
+import { useForm } from '../../hooks';
+import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 // import { addPost } from './../../actions/postActions';
 
 
+
 const PostForm = () => {
+	const { values, handleChange, handleSubmit } = useForm(() => {
+	}, {
+		text: ''
+	})
 	// 	constructor(props) {
 	// 		super(props);
 	// 		this.state = {
@@ -46,18 +52,18 @@ const PostForm = () => {
 					Say Something! Hey! Listen!
 	              </div>
 				<div className="card-body">
-					{/* <form onSubmit={this.onSubmit}> */}
-					<div className="form-group">
-						{/* <TextAreaFieldGroup
-										placeholder="Create a post"
-										name="text"
-										value={this.state.text}
-										onChange={this.onChange}
-										error={errors.text}
-									/> */}
-					</div>
-					<button type="submit" className="btn btn-dark">Submit</button>
-					{/* </form> */}
+					<form onSubmit={handleSubmit}>
+						<div className="form-group">
+							<TextAreaFieldGroup
+								placeholder="Create a post"
+								name="text"
+								value={values.text}
+								onChange={handleChange}
+							// error={errors.text}
+							/>
+						</div>
+						<button type="submit" className="btn btn-dark">Submit</button>
+					</form>
 				</div>
 			</div>
 		</div>

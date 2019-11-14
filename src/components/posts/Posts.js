@@ -33,7 +33,6 @@ const Posts = () => {
 	if (loading) {
 		postContent = <Spinner />
 	} else {
-		console.log(data.posts);
 		postContent = <PostFeed posts={data.posts} />
 	}
 

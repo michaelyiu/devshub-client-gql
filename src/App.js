@@ -26,7 +26,7 @@ import EditEducation from "./components/add-credentials/EditEducation";
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
-// import Post from './components/post/Post';
+import Post from './components/post/Post';
 
 import "./App.css";
 
@@ -60,6 +60,7 @@ const App = () => {
                     <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
                     <Route exact path="/edit-education/:edu_id" component={EditEducation} />
                     <Route exact path="/feed" component={Posts} />
+                    <Route exact path="/post/:id" component={Post} />
 
                     {/* <Route exact path="/post/:id" component={Post} /> */}
                     {/* <Route exact path="/" component={Landing} />
