@@ -1,21 +1,21 @@
 import React, { useEffect, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
+
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProfileContext } from '../../contexts/ProfileContext';
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 import { EducationContext } from '../../contexts/EducationContext';
-import Spinner from '../common/Spinner';
-import jwt_decode from 'jwt-decode';
-
-import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
-
-import { useQuery } from '@apollo/react-hooks';
-import { useHistory, Link } from "react-router-dom";
 
 import Experience from "./Experience";
 import Education from "./Education";
 import DeleteProfileButton from "./DeleteProfileButton";
-
 import ProfileActions from "./ProfileActions";
+
+import Spinner from '../common/Spinner';
 
 const Dashboard = () => {
 	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);

@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_PROFILE_BY_HANDLE } from "../gql/Queries"; //getuser by handle
+
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
 import Spinner from './../common/Spinner';
-
-import { GET_PROFILE_BY_HANDLE } from "../gql/Queries"; //getuser by handle
-
-import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
 
 const Profile = () => {
 	const { handle } = useParams();

@@ -1,13 +1,12 @@
 import React from "react";
-import { Redirect } from 'react-router';
 import { useForm } from '../../hooks'
-// import Spinner from '../common/Spinner';
+import { Redirect } from 'react-router';
+
+import { useMutation } from '@apollo/react-hooks';
+import { SIGNUP_MUTATION } from "../gql/Mutations";
 
 import TextFieldGroup from "../common/TextFieldGroup";
-
-import { SIGNUP_MUTATION } from "../gql/Mutations";
-import { useMutation } from '@apollo/react-hooks';
-
+// import Spinner from '../common/Spinner';
 
 const Register = () => {
   const { values, handleChange, handleSubmit } = useForm(() => {

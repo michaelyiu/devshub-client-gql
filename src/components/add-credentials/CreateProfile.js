@@ -2,18 +2,17 @@ import React, { useState, useContext } from 'react';
 import { useForm } from '../../hooks'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import Spinner from '../common/Spinner';
 
-import { UPDATE_PROFILE } from "../gql/Mutations";
-
-import TextFieldGroup from './../common/TextFieldGroup';
-import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
-import InputGroup from './../common/InputGroup';
-import SelectListGroup from './../common/SelectListGroup';
 import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_PROFILE } from "../gql/Mutations";
 
 import { ProfileContext } from '../../contexts/ProfileContext';
 
+import InputGroup from './../common/InputGroup';
+import SelectListGroup from './../common/SelectListGroup';
+import TextFieldGroup from './../common/TextFieldGroup';
+import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
+import Spinner from '../common/Spinner';
 
 const _ = require('lodash');
 

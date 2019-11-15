@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import { Redirect } from 'react-router';
 import { useForm } from '../../hooks';
-// import Spinner from '../common/Spinner';
+import { Redirect } from 'react-router';
+
+import { useMutation } from '@apollo/react-hooks';
+import { SIGNIN_MUTATION } from "../gql/Mutations";
 
 import { AuthContext } from '../../contexts/AuthContext';
-import TextFieldGroup from "../common/TextFieldGroup";
 
-import { SIGNIN_MUTATION } from "../gql/Mutations";
-import { useMutation } from '@apollo/react-hooks';
+import TextFieldGroup from "../common/TextFieldGroup";
+// import Spinner from '../common/Spinner';
 
 const Login = () => {
   const { values, handleChange, handleSubmit } = useForm(() => {

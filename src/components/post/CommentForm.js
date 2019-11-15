@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
 import { useForm } from '../../hooks';
-import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 
-import { CREATE_COMMENT } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
+import { CREATE_COMMENT } from "../gql/Mutations";
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { CommentContext } from '../../contexts/CommentContext';
+
+import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 
 const CommentForm = (props) => {
 	const { currentUser } = useContext(AuthContext);

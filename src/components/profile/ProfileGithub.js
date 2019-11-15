@@ -20,7 +20,6 @@ const ProfileGithub = (props) => {
 					console.log(err);
 					return null;
 				});
-			// const data = await result.json();
 		}
 		fetchRepos();
 	}, [username]);

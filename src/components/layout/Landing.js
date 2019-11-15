@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+
 import { AuthContext } from '../../contexts/AuthContext';
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 const Landing = () => {
   const { isAuthenticated } = useContext(AuthContext);

@@ -17,15 +17,6 @@ const useForm = (callback, data) => {
 		callback(values)
 	}
 
-	// const onCheck = (event) => {
-	// 	console.log(values)
-	// 	console.log(event.target);
-	// 	setValues(values => ({
-	// 		...values,
-	// 		[event.target.name]: event.target.value
-	// 	}))
-	// }
-
 	return {
 		handleChange,
 		handleSubmit,

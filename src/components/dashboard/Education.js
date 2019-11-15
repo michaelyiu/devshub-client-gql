@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { EducationContext } from '../../contexts/EducationContext';
-
 import { Link } from 'react-router-dom';
 
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { DELETE_EDUCATION } from "../gql/Mutations";
 import { GET_PROFILE } from "../gql/Queries";
 
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { EducationContext } from '../../contexts/EducationContext';
 
 import Moment from "react-moment";
 const moment = require('moment');

@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import Spinner from '../common/Spinner';
+
+import { useMutation } from '@apollo/react-hooks';
+import { CREATE_EXPERIENCE } from "../gql/Mutations";
+
+import { ExperienceContext } from '../../contexts/ExperienceContext';
 
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
-
-import { CREATE_EXPERIENCE } from "../gql/Mutations";
-import { useMutation } from '@apollo/react-hooks';
-
-import { ExperienceContext } from '../../contexts/ExperienceContext';
+import Spinner from '../common/Spinner';
 
 const AddExperience = () => {
 	const { addExperience } = useContext(ExperienceContext);

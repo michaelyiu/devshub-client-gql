@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
 import { Redirect } from 'react-router';
-import Spinner from '../common/Spinner';
-
 import { Link } from 'react-router-dom';
-import TextFieldGroup from '../common/TextFieldGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 
-import { CREATE_EDUCATION } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
+import { CREATE_EDUCATION } from "../gql/Mutations";
 
 import { EducationContext } from '../../contexts/EducationContext';
+
+import TextFieldGroup from '../common/TextFieldGroup';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import Spinner from '../common/Spinner';
 
 const AddEducation = () => {
 	const { addEducation } = useContext(EducationContext);

@@ -1,5 +1,4 @@
 import React from 'react';
-
 const _ = require('lodash');
 
 const ProfileGithub = (props) => {

@@ -1,10 +1,10 @@
 import React from 'react'
-import Spinner from './../common/Spinner';
 import ProfileItem from './ProfileItem';
 
+import { useQuery } from '@apollo/react-hooks';
 import { GET_ALL_PROFILES } from "../gql/Queries";
 
-import { useQuery } from '@apollo/react-hooks';
+import Spinner from './../common/Spinner';
 
 const Profiles = () => {
 

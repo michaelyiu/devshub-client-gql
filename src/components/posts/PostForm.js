@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
-import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 
-import { CREATE_POST } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
+import { CREATE_POST } from "../gql/Mutations";
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { PostContext } from '../../contexts/PostContext';
+
+import TextAreaFieldGroup from './../common/TextAreaFieldGroup';
 
 const PostForm = () => {
 	const { currentUser } = useContext(AuthContext);

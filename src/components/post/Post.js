@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import PostItem from './../posts/PostItem';
-import CommentForm from './CommentForm';
-import CommentFeed from './CommentFeed';
-import Spinner from './../common/Spinner';
+import { Link, useParams, useHistory } from 'react-router-dom';
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_POST } from "../gql/Queries";
 
 import { CommentContext } from '../../contexts/CommentContext';
 
-import { GET_POST } from "../gql/Queries";
+import PostItem from './../posts/PostItem';
+import CommentForm from './CommentForm';
+import CommentFeed from './CommentFeed';
 
-import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
+import Spinner from './../common/Spinner';
 
 const Post = () => {
 	const { setComments } = useContext(CommentContext);

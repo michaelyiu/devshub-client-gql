@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_PROFILE } from "../gql/Mutations";
@@ -7,12 +8,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { ProfileContext } from "../../contexts/ProfileContext";
 import { ExperienceContext } from "../../contexts/ExperienceContext";
 import { EducationContext } from "../../contexts/EducationContext";
-
-
-import { useHistory } from "react-router-dom";
-
-
-
 
 const DeleteProfileButton = () => {
 	const { toggleAuth, clearCurrentUser } = useContext(AuthContext);

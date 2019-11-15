@@ -1,10 +1,11 @@
 
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { CommentContext } from '../../contexts/CommentContext';
 
-import { DELETE_COMMENT } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
+import { DELETE_COMMENT } from "../gql/Mutations";
+
+import { CommentContext } from '../../contexts/CommentContext';
 
 const CommentItem = (props) => {
 	const { removeComment } = useContext(CommentContext);

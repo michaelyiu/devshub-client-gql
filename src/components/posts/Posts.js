@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
-import PostForm from './PostForm';
-import PostFeed from './PostFeed';
-import Spinner from './../common/Spinner';
+import { useHistory } from "react-router-dom";
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_POSTS } from "../gql/Queries";
 
 import { PostContext } from '../../contexts/PostContext';
 
-import { GET_POSTS } from "../gql/Queries";
-import { useQuery } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
+import PostForm from './PostForm';
+import PostFeed from './PostFeed';
+import Spinner from './../common/Spinner';
 
 const Posts = () => {
 	const { setPosts } = useContext(PostContext)

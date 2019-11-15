@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
-import { PostContext } from '../../contexts/PostContext';
+import { Link, useHistory } from 'react-router-dom';
 
-import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
+import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
+
+import { PostContext } from '../../contexts/PostContext';
 
 const PostItem = (props) => {
 	const { createLike, deleteLike, removePost } = useContext(PostContext);
