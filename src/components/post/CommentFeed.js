@@ -10,5 +10,4 @@ const CommentFeed = (props) => {
 	)
 }
 
-
 export default CommentFeed;

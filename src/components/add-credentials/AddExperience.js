@@ -122,7 +122,6 @@ const AddExperience = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
-						{/* supress warning for non usage for now */}
 						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>

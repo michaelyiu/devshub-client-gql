@@ -12,8 +12,6 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { EducationContext } from '../../contexts/EducationContext';
 
-// import { addEducation } from '../../actions/profileActions';
-
 const AddEducation = () => {
 	const { addEducation } = useContext(EducationContext);
 
@@ -124,7 +122,6 @@ const AddEducation = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
-						{/* supress warning for non usage for now */}
 						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>

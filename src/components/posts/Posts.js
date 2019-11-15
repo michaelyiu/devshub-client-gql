@@ -20,7 +20,6 @@ const Posts = () => {
 		{
 			onCompleted() {
 				setPosts(data.posts);
-
 			}
 		}
 	);

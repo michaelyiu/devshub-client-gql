@@ -21,7 +21,7 @@ const DeleteProfileButton = () => {
 	const { clearEducation } = useContext(EducationContext)
 	let history = useHistory();
 
-	const [deleteProfile, { loading, data, error }] = useMutation(
+	const [deleteProfile] = useMutation(
 		DELETE_PROFILE,
 	)
 

@@ -6,7 +6,6 @@ import { GET_ALL_PROFILES } from "../gql/Queries";
 
 import { useQuery } from '@apollo/react-hooks';
 
-
 const Profiles = () => {
 	const {
 		data, loading
@@ -27,6 +26,7 @@ const Profiles = () => {
 			profileItems = <h4>No profiles found....</h4>
 		}
 	}
+
 	return (
 		<div className="profiles">
 			<div className="container">

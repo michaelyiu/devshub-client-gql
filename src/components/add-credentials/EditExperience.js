@@ -12,7 +12,6 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 
-// import { addExperience } from '../../actions/profileActions';
 const moment = require('moment');
 
 const AddExperience = () => {
@@ -36,7 +35,6 @@ const AddExperience = () => {
 		disabled: false
 	})
 
-
 	const [editExperience, { loading, data, error }] = useMutation(
 		EDIT_EXPERIENCE,
 		{
@@ -45,15 +43,15 @@ const AddExperience = () => {
 	)
 
 	let errors;
+
 	if (!loading && error) {
 		errors = error.graphQLErrors[0].extensions.exception.errors;
 	}
 
 	if (loading) return <Spinner />
-	if (data) {
-		// values.id = data.editExperience.id
-		return <Redirect to='/dashboard' />
 
+	if (data) {
+		return <Redirect to='/dashboard' />
 	}
 
 	return (
@@ -129,7 +127,6 @@ const AddExperience = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
-						{/* supress warning for non usage for now */}
 						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>

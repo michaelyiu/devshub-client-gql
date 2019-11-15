@@ -8,14 +8,13 @@ import { useMutation } from '@apollo/react-hooks';
 import { AuthContext } from '../../contexts/AuthContext';
 import { PostContext } from '../../contexts/PostContext';
 
-
-
 const PostForm = () => {
 	const { currentUser } = useContext(AuthContext);
 	const { addPost } = useContext(PostContext);
 
-	const { values, handleChange, handleSubmit } = useForm(async () => {
-		await createPost();
+	const { values, handleChange, handleSubmit } = useForm(() => {
+		createPost();
+		values.text = ''
 		//push post to context to rerender
 	}, {
 		text: ''

@@ -20,7 +20,6 @@ const ProfileCreds = (props) => {
 		</li>
 	));
 
-
 	const eduItems = education.map(edu => (
 		<li key={edu.id} className="list-group-item">
 			<h4>{edu.school}</h4>
@@ -61,4 +60,5 @@ const ProfileCreds = (props) => {
 		</div>
 	)
 }
+
 export default ProfileCreds;

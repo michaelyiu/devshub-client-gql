@@ -16,6 +16,7 @@ const CommentForm = (props) => {
 
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		createComment();
+		values.text = ''
 	}, {
 		text: ''
 	})

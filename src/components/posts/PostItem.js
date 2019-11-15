@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { PostContext } from '../../contexts/PostContext';
@@ -7,17 +7,16 @@ import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
 
 const PostItem = (props) => {
-	const { posts, createLike, deleteLike, removePost } = useContext(PostContext);
+	const { createLike, deleteLike, removePost } = useContext(PostContext);
 	const { post } = props;
 	const { id: authUserId } = JSON.parse(localStorage.getItem('auth'));
-
 
 	const [addLike] = useMutation(ADD_LIKE, {
 		onCompleted({ addLike }) {
 			createLike(post, addLike)
 		}
-	}
-	);
+	});
+
 	const [removeLike] = useMutation(REMOVE_LIKE, {
 		onCompleted({ removeLike }) {
 			deleteLike(post, removeLike)

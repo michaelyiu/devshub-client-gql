@@ -6,7 +6,6 @@ import client from "./apollo";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
-import GQLTest from "./components/layout/GQLTest";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -40,95 +39,29 @@ const App = () => {
           <ProfileContextProvider>
             <ExperienceContextProvider>
               <EducationContextProvider>
+                <Router>
+                  <Navbar />
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/profiles" component={Profiles} />
+                  <Route exact path="/profile/:handle" component={Profile} />
 
-                <PostContextProvider>
-                  <CommentContextProvider>
-
-                    <Router>
-                      <GQLTest />
-                      <Navbar />
-                      <Route exact path="/" component={Landing} />
-                      <Route exact path="/register" component={Register} />
-                      <Route exact path="/login" component={Login} />
-                      <Route exact path="/profiles" component={Profiles} />
-                      <Route exact path="/profile/:handle" component={Profile} />
-
-
-                      <Route exact path="/dashboard" component={Dashboard} />
-                      <Route exact path="/create-profile" component={CreateProfile} />
-                      <Route exact path="/edit-profile" component={CreateProfile} />
-                      <Route exact path="/add-experience" component={AddExperience} />
-                      <Route exact path="/add-education" component={AddEducation} />
-                      <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
-                      <Route exact path="/edit-education/:edu_id" component={EditEducation} />
-                      <Route exact path="/feed" component={Posts} />
+                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/create-profile" component={CreateProfile} />
+                  <Route exact path="/edit-profile" component={CreateProfile} />
+                  <Route exact path="/add-experience" component={AddExperience} />
+                  <Route exact path="/add-education" component={AddEducation} />
+                  <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
+                  <Route exact path="/edit-education/:edu_id" component={EditEducation} />
+                  <PostContextProvider>
+                    <Route exact path="/feed" component={Posts} />
+                    <CommentContextProvider>
                       <Route exact path="/post/:id" component={Post} />
-
-                      {/* <Route exact path="/post/:id" component={Post} /> */}
-                      {/* <Route exact path="/" component={Landing} />
-          <div className="container">
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/profiles" component={Profiles} />
-          <Route exact path="/profile/:handle" component={Profile} />
-          <Switch>
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/create-profile"
-                component={CreateProfile}
-                />
-            </Switch>
-            <Switch>
-            <PrivateRoute
-            exact
-            path="/edit-profile"
-            component={EditProfile}
-            />
-            </Switch>
-            <Switch>
-            <PrivateRoute
-            exact
-            path="/add-experience"
-            component={AddExperience}
-            />
-            </Switch>
-            <Switch>
-            <PrivateRoute
-            exact
-            path="/edit-experience/:exp_id"
-            component={EditExperience}
-            />
-            </Switch>
-            <Switch>
-            <PrivateRoute
-            exact
-            path="/add-education"
-            component={AddEducation}
-              />
-              </Switch>
-              <Switch>
-              <PrivateRoute
-              exact
-              path="/edit-education/:edu_id"
-              component={EditEducation}
-              />
-              </Switch>
-              <Switch>
-              <PrivateRoute exact path="/feed" component={Posts} />
-              </Switch>
-            <Switch>
-            <PrivateRoute exact path="/post/:id" component={Post} />
-            </Switch>
-            <Route exact path="/not-found" component={NotFound} />
-          </div> */}
-                      <Footer />
-                    </Router>
-                  </CommentContextProvider>
-
-                </PostContextProvider>
+                    </CommentContextProvider>
+                  </PostContextProvider>
+                  <Footer />
+                </Router>
               </EducationContextProvider>
             </ExperienceContextProvider>
           </ProfileContextProvider>

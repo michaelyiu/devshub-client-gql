@@ -17,9 +17,6 @@ const ProfileAbout = (props) => {
 		));
 	}
 
-
-
-
 	return (
 		<div className="row">
 			<div className="col-md-12">

@@ -12,7 +12,6 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { EducationContext } from '../../contexts/EducationContext';
 
-// import { addEducation } from '../../actions/profileActions';
 const moment = require('moment');
 
 const AddEducation = () => {
@@ -50,10 +49,9 @@ const AddEducation = () => {
 	}
 
 	if (loading) return <Spinner />
-	if (data) {
-		// values.id = data.editEducation.id
-		return <Redirect to='/dashboard' />
 
+	if (data) {
+		return <Redirect to='/dashboard' />
 	}
 
 	return (
@@ -129,7 +127,6 @@ const AddEducation = () => {
 							/>
 							<input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
 						</form>
-						{/* supress warning for non usage for now */}
 						{error && <p data-testid="login-error">{error.message}</p>}
 					</div>
 				</div>

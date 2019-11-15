@@ -70,8 +70,6 @@ const Dashboard = () => {
 		}
 	);
 
-
-
 	useEffect(() => {
 		const token = jwt_decode(window.localStorage.getItem('token'));
 		window.localStorage.setItem('auth', JSON.stringify(token))
@@ -79,11 +77,11 @@ const Dashboard = () => {
 			history.push("/login");
 		} else {
 			//if the user is authenticated
-
 		}
-		//empty array may need to be removed
-	})
+	});
+
 	let dashboardContent;
+
 	if (currentUserLoading || userProfileLoading) return <Spinner />
 	else {
 		if (profile && Object.keys(profile).length > 0) {
