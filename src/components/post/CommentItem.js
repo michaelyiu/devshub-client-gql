@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/react-hooks';
-import { DELETE_COMMENT } from "../gql/Mutations";
+import { DELETE_COMMENT } from "../../gql/Mutations/posts";
 
 import { CommentContext } from '../../contexts/CommentContext';
 

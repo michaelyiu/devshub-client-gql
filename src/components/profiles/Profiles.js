@@ -2,7 +2,7 @@ import React from 'react'
 import ProfileItem from './ProfileItem';
 
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ALL_PROFILES } from "../gql/Queries";
+import { GET_ALL_PROFILES } from "../../gql/Queries/profile";
 
 import Spinner from './../common/Spinner';
 

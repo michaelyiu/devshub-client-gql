@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { DELETE_EDUCATION } from "../gql/Mutations";
-import { GET_PROFILE } from "../gql/Queries";
+import { DELETE_EDUCATION } from "../../gql/Mutations/education";
+import { GET_PROFILE } from "../../gql/Queries/profile";
 
 import { EducationContext } from '../../contexts/EducationContext';
 

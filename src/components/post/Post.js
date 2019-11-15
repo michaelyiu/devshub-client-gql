@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom';
 
 import { useQuery } from '@apollo/react-hooks';
-import { GET_POST } from "../gql/Queries";
+import { GET_POST } from "../../gql/Queries/posts";
 
 import { CommentContext } from '../../contexts/CommentContext';
 

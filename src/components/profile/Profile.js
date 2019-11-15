@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PROFILE_BY_HANDLE } from "../gql/Queries"; //getuser by handle
+import { GET_PROFILE_BY_HANDLE } from "../../gql/Queries/profile"; //getuser by handle
 
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';

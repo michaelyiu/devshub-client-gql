@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
 
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
+import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../../gql/Mutations/posts";
 
 import { PostContext } from '../../contexts/PostContext';
 

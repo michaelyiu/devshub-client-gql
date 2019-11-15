@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_PROFILE } from "../gql/Mutations";
+import { UPDATE_PROFILE } from "../../gql/Mutations/profile";
 
 import { ProfileContext } from '../../contexts/ProfileContext';
 

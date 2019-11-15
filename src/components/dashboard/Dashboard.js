@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PROFILE, GET_CURRENT_USER } from "../gql/Queries";
+import { GET_CURRENT_USER } from "../../gql/Queries/auth";
+import { GET_PROFILE } from "../../gql/Queries/profile";
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProfileContext } from '../../contexts/ProfileContext';

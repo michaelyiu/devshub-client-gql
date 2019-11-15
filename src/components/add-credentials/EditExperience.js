@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 
 import { useMutation } from '@apollo/react-hooks';
-import { EDIT_EXPERIENCE } from "../gql/Mutations";
+import { EDIT_EXPERIENCE } from "../../gql/Mutations/experience";
 
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 

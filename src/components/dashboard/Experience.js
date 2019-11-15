@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { DELETE_EXPERIENCE } from "../gql/Mutations";
-import { GET_PROFILE } from "../gql/Queries";
+import { DELETE_EXPERIENCE } from "../../gql/Mutations/experience";
+import { GET_PROFILE } from "../../gql/Queries/profile";
 
 import { ExperienceContext } from '../../contexts/ExperienceContext';
 

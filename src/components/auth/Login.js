@@ -3,7 +3,7 @@ import { useForm } from '../../hooks';
 import { Redirect } from 'react-router';
 
 import { useMutation } from '@apollo/react-hooks';
-import { SIGNIN_MUTATION } from "../gql/Mutations";
+import { SIGNIN_MUTATION } from "../../gql/Mutations/auth";
 
 import { AuthContext } from '../../contexts/AuthContext';
 

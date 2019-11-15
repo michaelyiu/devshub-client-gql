@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useMutation } from '@apollo/react-hooks';
-import { DELETE_PROFILE } from "../gql/Mutations";
+import { DELETE_PROFILE } from "../../gql/Mutations/profile";
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProfileContext } from "../../contexts/ProfileContext";

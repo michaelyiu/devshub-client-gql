@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from '../../hooks';
 
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_POST } from "../gql/Mutations";
+import { CREATE_POST } from "../../gql/Mutations/posts";
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { PostContext } from '../../contexts/PostContext';

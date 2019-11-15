@@ -3,7 +3,7 @@ import { useForm } from '../../hooks'
 import { Redirect } from 'react-router';
 
 import { useMutation } from '@apollo/react-hooks';
-import { SIGNUP_MUTATION } from "../gql/Mutations";
+import { SIGNUP_MUTATION } from "../../gql/Mutations/auth";
 
 import TextFieldGroup from "../common/TextFieldGroup";
 // import Spinner from '../common/Spinner';

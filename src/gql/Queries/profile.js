@@ -39,23 +39,6 @@ const GET_ALL_PROFILES = gql`
 	}
 `;
 
-
-const GET_CURRENT_USER = gql`
-	query ($email: String!) {
-		user(email: $email) {
-    	name 
-			email
-			avatar
-		}
-  }
-`;
-
-const ISLOGGEDIN_QUERY = gql`
-	query {
-		isAuth @client
-	}
-`;
-
 const GET_PROFILE = gql`
 	query ($email: String!) {
 		profile(email: $email) {
@@ -144,62 +127,8 @@ const GET_PROFILE_BY_HANDLE = gql`
 	}
 `;
 
-
-const GET_POSTS = gql`
-	query {
-		posts{
-			id
-			user
-			text
-			name
-			handle
-			avatar
-			likes{
-				id
-				user
-			}
-			comments{
-				text
-				name
-				handle
-			}
-		}
-	}
-`;
-
-const GET_POST = gql`
-	query($id: ID!){
-		post(id: $id){
-			id
-			text
-			name
-			likes{
-				id
-				user
-			}
-			handle
-			avatar
-			comments{
-				id
-				user
-				text
-				name
-				date
-				handle
-				avatar
-			}
-		}
-	}
-`;
-
 export {
-	ISLOGGEDIN_QUERY,
-	GET_CURRENT_USER,
 	GET_PROFILE,
 	GET_PROFILE_BY_HANDLE,
-	GET_ALL_PROFILES,
-	GET_POSTS,
-	GET_POST
-};
-
-
+	GET_ALL_PROFILES
+}
