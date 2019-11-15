@@ -1,7 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./apollo";
+
+
+import PrivateRoute from './components/common/PrivateRoute';
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -32,6 +35,27 @@ import NotFound from './components/common/NotFoundPage';
 
 import "./App.css";
 
+// Check for token
+// if (localStorage.jwtToken) {
+//   //Set auth token header auth
+//   setAuthToken(localStorage.jwtToken);
+//   // decode token and get user info and expiration
+//   const decoded = jwt_decode(localStorage.jwtToken);
+//   //Set user and isAuthenticated
+//   store.dispatch(setCurrentUser(decoded));
+
+//   //Check for expired token
+//   const currentTime = Date.now() / 1000;
+//   if (decoded.exp < currentTime) {
+//     // Logout user
+//     store.dispatch(logoutUser());
+
+//     store.dispatch(clearCurrentProfile());
+
+//     //Redirect to login
+//     window.location.href = '/login';
+//   }
+// }
 
 const App = () => {
   return (
@@ -49,17 +73,33 @@ const App = () => {
                   <Route exact path="/profiles" component={Profiles} />
                   <Route exact path="/profile/:handle" component={Profile} />
 
-                  <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/create-profile" component={CreateProfile} />
-                  <Route exact path="/edit-profile" component={CreateProfile} />
-                  <Route exact path="/add-experience" component={AddExperience} />
-                  <Route exact path="/add-education" component={AddEducation} />
-                  <Route exact path="/edit-experience/:exp_id" component={EditExperience} />
-                  <Route exact path="/edit-education/:edu_id" component={EditEducation} />
+                  <Switch>
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  </Switch>
+                  <Switch>
+                    <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+                  </Switch>
+                  <PrivateRoute exact path="/edit-profile" component={CreateProfile} />
+                  <Switch>
+                    <PrivateRoute exact path="/add-experience" component={AddExperience} />
+                  </Switch>
+                  <Switch>
+                    <PrivateRoute exact path="/add-education" component={AddEducation} />
+                  </Switch>
+                  <Switch>
+                    <PrivateRoute exact path="/edit-experience/:exp_id" component={EditExperience} />
+                  </Switch>
+                  <Switch>
+                    <PrivateRoute exact path="/edit-education/:edu_id" component={EditEducation} />
+                  </Switch>
                   <PostContextProvider>
-                    <Route exact path="/feed" component={Posts} />
+                    <Switch>
+                      <PrivateRoute exact path="/feed" component={Posts} />
+                    </Switch>
                     <CommentContextProvider>
-                      <Route exact path="/post/:id" component={Post} />
+                      <Switch>
+                        <PrivateRoute exact path="/post/:id" component={Post} />
+                      </Switch>
                     </CommentContextProvider>
                   </PostContextProvider>
                   <Route exact path="/not-found" component={NotFound} />

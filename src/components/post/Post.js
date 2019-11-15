@@ -28,12 +28,10 @@ const Post = () => {
 	});
 
 	let post;
+	let postContent;
 
 	if (data)
 		post = data.post;
-
-
-	let postContent;
 
 	if (post === null || loading || Object.keys(post).length === 0) {
 		postContent = <Spinner />

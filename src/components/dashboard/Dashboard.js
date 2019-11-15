@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 
@@ -18,7 +18,7 @@ import ProfileActions from "./ProfileActions";
 import Spinner from '../common/Spinner';
 
 const Dashboard = () => {
-	const { isAuthenticated, addCurrentUser, currentUser } = useContext(AuthContext);
+	const { addCurrentUser, currentUser } = useContext(AuthContext);
 	const { profile, setProfile } = useContext(ProfileContext);
 	const { setExperience } = useContext(ExperienceContext);
 	const { setEducation } = useContext(EducationContext);
@@ -55,6 +55,9 @@ const Dashboard = () => {
 			},
 			onCompleted() {
 				if (userProfile && userProfile.profile) {
+					const token = jwt_decode(window.localStorage.getItem('token'));
+					window.localStorage.setItem('auth', JSON.stringify(token));
+
 					setExperience(userProfile.profile.experience)
 					setEducation(userProfile.profile.education)
 					setProfile(userProfile.profile)
@@ -66,16 +69,6 @@ const Dashboard = () => {
 
 	if (currentUserError || userProfileError)
 		history.push('/not-found');
-
-	useEffect(() => {
-		const token = jwt_decode(window.localStorage.getItem('token'));
-		window.localStorage.setItem('auth', JSON.stringify(token))
-		if (!isAuthenticated) {
-			history.push("/login");
-		} else {
-			//if the user is authenticated
-		}
-	});
 
 	let dashboardContent;
 
