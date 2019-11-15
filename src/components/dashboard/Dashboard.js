@@ -27,12 +27,6 @@ const Dashboard = () => {
 
 	const loggedInEmail = localStorage.getItem("email");
 
-	// If loading, load spinner, otherwise load actual content
-	/*
-		if(profile === null || loading) {
-			dashboardContent = <Spinner />
-		}
-	*/
 	const {
 		data: currentUserData,
 		loading: currentUserLoading,
@@ -70,6 +64,9 @@ const Dashboard = () => {
 		}
 	);
 
+	if (currentUserError || userProfileError)
+		history.push('/not-found');
+
 	useEffect(() => {
 		const token = jwt_decode(window.localStorage.getItem('token'));
 		window.localStorage.setItem('auth', JSON.stringify(token))
@@ -102,11 +99,10 @@ const Dashboard = () => {
 					<div className="lead text-name">Welcome {currentUser.name}</div>
 					<Link to="/create-profile" className="btn btn-lg btn-info">
 						Create Profile
-            </Link>
+					</Link>
 				</div>
 			)
 		}
-
 	}
 
 	return (

@@ -10,14 +10,17 @@ const ProfileGithub = (props) => {
 	const sort = 'created: asc';
 
 	useEffect(() => {
-
-		async function fetchRepos() {
-			const result = await fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}$client_id=${clientId}&client_secret=${clientSecret}`).catch(err => {
-				console.log(err);
-				return null
-			})
-			const data = await result.json()
-			setRepos(data);
+		const fetchRepos = () => {
+			fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}$client_id=${clientId}&client_secret=${clientSecret}`)
+				.then(res => res.json())
+				.then(data => {
+					setRepos(data);
+				})
+				.catch(err => {
+					console.log(err);
+					return null;
+				});
+			// const data = await result.json();
 		}
 		fetchRepos();
 	}, [username]);

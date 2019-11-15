@@ -9,18 +9,23 @@ import Spinner from './../common/Spinner';
 import { GET_PROFILE_BY_HANDLE } from "../gql/Queries"; //getuser by handle
 
 import { useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 const Profile = () => {
-
 	const { handle } = useParams();
+	const history = useHistory();
 
 	const { data, loading, error } = useQuery(GET_PROFILE_BY_HANDLE, {
 		variables: { handle }
 	})
 
 	let profile;
+
 	if (!loading && data)
 		profile = data.profileByHandle;
+
+	if (error)
+		history.push('/not-found');
 
 	let profileContent;
 
@@ -34,7 +39,7 @@ const Profile = () => {
 					<div className="col-md-6">
 						<Link to="/profiles" className="btn btn-light mb-3 float-left">
 							Back To Profiles
-		             </Link>
+						</Link>
 					</div>
 					<div className="col-md-6">
 					</div>

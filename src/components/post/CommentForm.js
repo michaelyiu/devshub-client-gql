@@ -21,7 +21,7 @@ const CommentForm = (props) => {
 		text: ''
 	})
 
-	const [createComment] = useMutation(CREATE_COMMENT, {
+	const [createComment, { loading, error }] = useMutation(CREATE_COMMENT, {
 		variables: {
 			post_id: postId,
 			text: values.text,
@@ -33,6 +33,11 @@ const CommentForm = (props) => {
 				addComment(data.createComment)
 		}
 	})
+
+	let errors;
+	if (!loading && error) {
+		errors = error.graphQLErrors[0].extensions.exception.errors;
+	}
 
 	return (
 		<div className="post-form mb-3">
@@ -48,7 +53,7 @@ const CommentForm = (props) => {
 								name="text"
 								value={values.text}
 								onChange={handleChange}
-							// error={errors.text}
+								error={errors && errors.text ? errors.text : null}
 							/>
 						</div>
 						<button type="submit" className="btn btn-dark">Submit</button>

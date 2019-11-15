@@ -28,6 +28,8 @@ import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 
+import NotFound from './components/common/NotFoundPage';
+
 import "./App.css";
 
 
@@ -60,6 +62,8 @@ const App = () => {
                       <Route exact path="/post/:id" component={Post} />
                     </CommentContextProvider>
                   </PostContextProvider>
+                  <Route exact path="/not-found" component={NotFound} />
+
                   <Footer />
                 </Router>
               </EducationContextProvider>

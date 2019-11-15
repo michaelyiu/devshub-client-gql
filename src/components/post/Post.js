@@ -10,9 +10,11 @@ import { CommentContext } from '../../contexts/CommentContext';
 import { GET_POST } from "../gql/Queries";
 
 import { useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 const Post = () => {
 	const { setComments } = useContext(CommentContext);
+	const history = useHistory();
 
 	const { id: postId } = useParams();
 
@@ -30,10 +32,14 @@ const Post = () => {
 	if (data)
 		post = data.post;
 
+
 	let postContent;
 
 	if (post === null || loading || Object.keys(post).length === 0) {
 		postContent = <Spinner />
+	} else if (error) {
+		history.push('/not-found');
+
 	} else {
 		postContent = (<div>
 			<PostItem post={post} showActions={false} />

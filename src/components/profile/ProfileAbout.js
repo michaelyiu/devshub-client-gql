@@ -3,13 +3,12 @@ const _ = require('lodash');
 
 const ProfileAbout = (props) => {
 	const { profile } = props;
-	// Get first name
 	let firstName;
 	let skills;
 	if (profile) {
 		firstName = profile.user.name.trim().split(' ')[0];
 
-		// 	// Skill list
+		// Skill list
 		skills = profile.skills.map((skill, index) => (
 			<div key={index} className="p-3">
 				<i className="fa fa-check"></i>{skill}

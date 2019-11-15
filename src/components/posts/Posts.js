@@ -7,9 +7,11 @@ import { PostContext } from '../../contexts/PostContext';
 
 import { GET_POSTS } from "../gql/Queries";
 import { useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 const Posts = () => {
 	const { setPosts } = useContext(PostContext)
+	const history = useHistory();
 
 	const {
 		data,
@@ -29,6 +31,8 @@ const Posts = () => {
 	// if posts is loading , then show loading spinner
 	if (loading) {
 		postContent = <Spinner />
+	} else if (error) {
+		history.push('/not-found');
 	} else {
 		postContent = <PostFeed posts={data.posts} />
 	}

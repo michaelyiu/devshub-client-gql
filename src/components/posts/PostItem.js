@@ -5,25 +5,38 @@ import { PostContext } from '../../contexts/PostContext';
 
 import { ADD_LIKE, REMOVE_LIKE, DELETE_POST } from "../gql/Mutations";
 import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 const PostItem = (props) => {
 	const { createLike, deleteLike, removePost } = useContext(PostContext);
 	const { post } = props;
 	const { id: authUserId } = JSON.parse(localStorage.getItem('auth'));
 
+	const history = useHistory();
+
 	const [addLike] = useMutation(ADD_LIKE, {
 		onCompleted({ addLike }) {
 			createLike(post, addLike)
+		},
+		onError() {
+			history.push('/not-found');
 		}
 	});
 
 	const [removeLike] = useMutation(REMOVE_LIKE, {
 		onCompleted({ removeLike }) {
 			deleteLike(post, removeLike)
+		},
+		onError() {
+			history.push('/not-found');
 		}
 	});
 
-	const [deletePost] = useMutation(DELETE_POST);
+	const [deletePost] = useMutation(DELETE_POST, {
+		onError() {
+			history.push('/not-found');
+		}
+	});
 
 	const onDeleteClick = (post_id) => {
 		deletePost({ variables: { id: post_id } });

@@ -7,6 +7,7 @@ import { GET_ALL_PROFILES } from "../gql/Queries";
 import { useQuery } from '@apollo/react-hooks';
 
 const Profiles = () => {
+
 	const {
 		data, loading
 	} = useQuery(GET_ALL_PROFILES)

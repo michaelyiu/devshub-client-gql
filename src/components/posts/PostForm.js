@@ -15,12 +15,11 @@ const PostForm = () => {
 	const { values, handleChange, handleSubmit } = useForm(() => {
 		createPost();
 		values.text = ''
-		//push post to context to rerender
 	}, {
 		text: ''
 	})
 
-	const [createPost] = useMutation(CREATE_POST, {
+	const [createPost, { loading, error }] = useMutation(CREATE_POST, {
 		variables: {
 			text: values.text,
 			name: currentUser.name,
@@ -31,6 +30,11 @@ const PostForm = () => {
 				addPost(data.createPost)
 		}
 	})
+
+	let errors;
+	if (!loading && error) {
+		errors = error.graphQLErrors[0].extensions.exception.errors;
+	}
 
 	return (
 		<div className="post-form mb-3">
@@ -46,7 +50,7 @@ const PostForm = () => {
 								name="text"
 								value={values.text}
 								onChange={handleChange}
-							// error={errors.text}
+								error={errors && errors.text ? errors.text : null}
 							/>
 						</div>
 						<button type="submit" className="btn btn-dark">Submit</button>

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 const Landing = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
-  let history = useHistory();
+  const history = useHistory();
 
   if (isAuthenticated)
     history.push("/dashboard");
