@@ -45,13 +45,21 @@ const Experience = () => {
 	const onClickHandler = async (exp_id) => {
 		onDeleteHandler({ variables: { id: exp_id } });
 	}
+	experience.sort(function (a, b) {
+		const currentDate = new Date();
+		if (a.current === true)
+			a.to = currentDate;
+		else if (b.current === true)
+			b.to = currentDate;
+		return moment.unix(b.to / 1000) - moment.unix(a.to / 1000);
+	})
 
 	const expJSX = experience.map(exp => (
 		<div key={exp.id} className="flex-container exp-row">
 			<div className="exp-column">{exp.company}</div>
 			<div className="exp-column title">{exp.title}</div>
 			<div className="exp-column years">
-				<Moment format="YYYY/MM/DD">{moment.unix(exp.from / 1000)}</Moment> - {exp.to === null ? ('Now') : <Moment format="YYYY/MM/DD">{moment.unix(exp.to / 1000)}</Moment>}
+				<Moment format="YYYY/MM/DD">{moment.unix(exp.from / 1000)}</Moment> - {exp.current ? ('Now') : <Moment format="YYYY/MM/DD">{moment.unix(exp.to / 1000)}</Moment>}
 			</div>
 			<div className="exp-column buttonGroup">
 				<Link to={`/edit-experience/${exp.id}`} className="btn btn-primary btn-custom">Edit</Link>

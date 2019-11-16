@@ -46,12 +46,21 @@ const Education = () => {
 		onDeleteHandler({ variables: { id: edu_id } });
 	}
 
+	education.sort(function (a, b) {
+		const currentDate = new Date();
+		if (a.current === true)
+			a.to = currentDate;
+		else if (b.current === true)
+			b.to = currentDate;
+		return moment.unix(b.to / 1000) - moment.unix(a.to / 1000);
+	})
+
 	const eduJSX = education.map(edu => (
 		<div key={edu.id} className="flex-container edu-row">
 			<div className="edu-column">{edu.school}</div>
 			<div className="edu-column degree">{edu.degree}</div>
 			<div className="edu-column years">
-				<Moment format="YYYY/MM/DD">{moment.unix(edu.from / 1000)}</Moment> - {edu.to === null ? ('Now') : <Moment format="YYYY/MM/DD">{moment.unix(edu.to / 1000)}</Moment>}
+				<Moment format="YYYY/MM/DD">{moment.unix(edu.from / 1000)}</Moment> - {edu.current ? ('Now') : <Moment format="YYYY/MM/DD">{moment.unix(edu.to / 1000)}</Moment>}
 			</div>
 			<div className="edu-column buttonGroup">
 				<Link to={`/edit-education/${edu.id}`} className="btn btn-primary btn-custom">Edit</Link>
