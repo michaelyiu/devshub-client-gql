@@ -22,7 +22,6 @@ const Navbar = () => {
     clearExperience();
     clearEducation();
     history.push("/login");
-
   }
 
   const authLinks = (
@@ -30,7 +29,7 @@ const Navbar = () => {
       <li className="nav-item flex-center-vertically">
         <Link className="nav-link" to="/feed">
           Post Feed
-          </Link>
+        </Link>
       </li>
       <li className="nav-item flex-center-vertically">
         <Link className="nav-link" to="/dashboard">

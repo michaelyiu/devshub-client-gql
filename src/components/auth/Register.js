@@ -49,7 +49,7 @@ const Register = () => {
             <h1 className="display-4 text-center">Sign Up</h1>
             <p className="lead text-center">
               Create your DevConnector account
-                </p>
+            </p>
             <form onSubmit={handleSubmit} noValidate>
               <TextFieldGroup
                 placeholder="Name"
